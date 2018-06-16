@@ -1,0 +1,574 @@
+1.(单选题)在Linux系统中，以下（ ）命令可用来查找文件所在路径
+ A.whoami
+ B.grep
+ C.find
+ D.where
+
+正确答案：C
+
+whoami显示当前用户，grep在文本文件内容过滤指定字符串，
+
+where无此命令
+
+2.(单选题)在Linux系统中利用find工具按文件类型查找选项是（ ）
+ A.type
+ B.name
+ C.size
+ D.user
+
+正确答案：A
+
+name为按照名字查找，size按照大小查找，user按照所有者查
+
+找
+
+3.(单选题)在Linux系统中，若要实现开机自动挂载文件系统，需要修改（ ）
+配置文件。
+ A./etc/fstab
+ B./etc/auto.master
+ C./etc/startup
+ D./etc/mount
+
+正确答案：A
+
+B选项为autofs触发挂载配置文件，C选项无此文件，D选项无此文件
+
+4.(单选题)vim有几种工作模式( )
+ A.5种
+ B.3种
+ C.2种
+ D.7种
+
+正确答案：B
+
+Vim模式分为命令模式、输入模式、末行模式一共三种
+
+5.(单选题)以下( )为C类地址默认的子网掩码
+ A.225.225.225.0
+ B.255.255.255.0
+ C.255.255.0.0
+ D.255.0.0.0
+
+正确答案：B
+
+
+6.(单选题)扩展逻辑卷的命令为( )
+ A.lvcreate
+ B.vgcreate
+ C.vgextend
+ D.lvextend
+
+正确答案：D
+
+lvcreate为创建逻辑卷的命令，vgcreate为创建卷组的命令，
+
+vgextend为扩展卷组的命令
+
+7.(单选题)为/dir目录设置student用户的ACL权限，以下命令正确的是( )
+ A.setfacl -m u:student:rwx /dir
+ B.setfacl -s u:student:rwx /dir
+ C.getfacl -s u:student:rwx /dir
+ D.getfacl -m u:student:rwx /dir
+
+正确答案：A
+
+setfacl为设置ACL权限的命令，getfacl为查看ACL权限命令，
+
+-m选项定义ACL策略，u代表为用户设置ACL策略
+
+8.(单选题)配置NTP客户端服务的需要安装（ ）包
+ A.ntp
+ B.chrony
+ C.chronyd
+ D.chronyd.conf
+
+正确答案：B
+
+ntp为网络时间同步协议，chronyd为服务名，chronyd.conf为
+
+主配置文件
+
+9.(单选题)将逻辑卷/dev/vg_data/lv_data的容量增加10G的命令是（ ）
+ A.lvextend -L +10G /dev/vg_data/lv_data
+ B.lvextend -add +10G /dev/vg_data/lv_data
+ C.lvextend -max +10G /dev/vg_data/lv_data
+ D.vgextend -L +10G /dev/vg_data/lv_data
+
+正确答案：A
+
+B选项无-add选项，C选项无-max选项，D选项vgextend为
+
+扩展卷组空间
+
+10.(单选题)Windows查看IP地址的命令为（ ）
+ A.ifconfig
+ B.ipconfig
+ C.ipconf
+ D.ifconf
+
+正确答案：B
+
+
+11.(单选题)以下那个命令可以列出/etc/文件夹的属性 ( )
+ A.ls -lh /etc/
+ B.ls -lA /etc/
+ C.ls -A /etc/
+ D.ls -ld /etc/
+
+正确答案：D
+
+ls -l为显示目录内容详细属性，-d选项为显示目录本身的详细
+
+属性，-h选项显示人类易读的单位，-A选项显示目录所有包含隐藏内
+
+容
+
+12.(单选题)使用cp命令时以下说法正确的是（）
+ A.cp -r 可以拷贝文件，但不能拷贝目录
+ B.cp -f 可以拷贝目录
+ C.cp -rf 可以拷贝文件和目录
+ D.cp -f 不可以拷贝文件
+
+正确答案：C
+
+cp命令-r选项可以拷贝目录，-f选项代表强制在cp命令运用中
+
+由于有别名的存在所以-f无任何效果
+
+13.(单选题)自定义yum源时可以利用（ ）命令生成仓库数据文件
+ A.yumrepo
+ B.addrepo
+ C.createrepo
+ D.yum-repo
+
+正确答案：C
+
+ABC无此命令
+
+14.(单选题)在Linux系统中，以下（ ）不属于YUM软件仓库提供的方式
+ A.file://
+ B.ftp://
+ C.http://
+ D.mail://
+
+正确答案：D
+
+A选项为本地Yum仓库，D选项没有mail提供方式</p>
+
+15.(单选题)如何彻底禁用selinux（ ）
+ A.修改/etc/selinux/config文件中后重启服务器
+ B.修改/etc/selinux/config文件中后重启服务
+ C.使用setenforce 1命令禁用
+ D.使用setenforce 0命令禁用
+
+正确答案：A
+
+彻底禁用SELinux需要修改运行模式为Disabled需要修改/etc/selinux/config文件中后重启服务器
+
+16.(单选题)在Linux系统删除一个组的命令应该是什么( )
+ A.groupmod
+ B.groupdel
+ C.userdel
+ D.usermod
+
+正确答案：B
+
+groupmod修改组属性，userdel删除用户，usermod修改用
+
+户属性
+
+17.(单选题)某公司有www.google.com和www.goojie.com两个站点，使用相同
+的公网IP地址，若要在一台Linux主机中提供两个站点的Web服务，可
+采用的最佳方案为（ ）
+ A.安装两个httpd软件包，每个软件包对应一个Web站点
+ B.安装一个httpd软件包，使用httpd1.conf、httpd2.conf两个独立配置文件
+ C.安装一个httpd软件包，为两个Web站点配置基于域名的虚拟主机
+ D.安装一个httpd软件包，为两个Web站点指定基于IP地址的虚拟主机
+
+正确答案：C
+
+本题考查虚拟Web主机功能，在一台Linux服务器上实现多个
+
+网站，且域名不同。利用基于域名的虚拟Web主机即可实现
+
+18.(单选题)在Linux系统中，以下（ ）命令可查找/boot目录下的快捷方式文件
+ A.find /boot –type l
+ B.find /boot –type f
+ C.find /boot –name l
+ D.find /boot –name f
+
+正确答案：A
+
+-type是安装类型查找，l为快捷方式类型，-name是按照名字
+
+查找
+
+19.(单选题)配置NFS共享服务的配置文件为（ ）
+ A./etc/exports
+ B./etc/resolv.conf
+ C./etc/fstab
+ D./etc/nfs.conf
+
+正确答案：B
+
+B选项为DNS服务器配置文件，C选项为开机自动挂载配置文件，D选项无此文件
+
+20.(单选题)在vim编辑器的（ ）模式中可以实现录入、退格等编辑操作
+ A.退出模式
+ B.输入模式
+ C.命令模式
+ D.末行模式
+
+正确答案：B
+
+A选项无此模式，C选项此模式一般查看文本文件内容，可以做
+
+一些简单的操作，D选项此模式默认情况下用于保存退出，开启一些功
+
+能等操作
+
+21.(单选题)查询samba用户的命令（ ）
+ A.pdbedit -a 用户名
+ B.id 用户名
+ C.pdbedit -L 用户名
+ D.pdbedit -x 用户名
+
+正确答案：C
+
+A选项位添加Samba用户，B选项为查看用户信息，D选项为
+
+删除Samba账号
+
+22.(单选题)在Bash命令行环境中，使用快捷键（ ）可以实现清屏操作
+ A.Ctrl+u
+ B.Ctrl+k
+ C.Ctrl+l
+ D.Ctrl+c
+
+正确答案：C
+
+Ctrl+u为清空至行首，Ctrl+k为清空至行尾，Ctrl+c为结束当
+
+前正在运行的程序
+
+23.(单选题)在Linux系统中，使用lvextend命令为指定的逻辑卷动态扩容以后，
+通过df命令查看时该分区显示的大小并未变化，还需要进行（ ）操作
+以便系统能够更新ext4文件系统大小。
+ A.partprobe
+ B.resize2fs
+ C.lvscan
+ D.mount
+
+正确答案：B
+
+A选项为刷新分区表，C选项为查看逻辑卷信息，D选项mount
+
+挂载
+
+24.(单选题)在Linux系统中，执行（ ）操作可以将/mail文件夹的属组设置为postfix
+ A.chmod postfix /mail
+ B.chown :postfix /mail
+ C.groupmod postfix /mail
+ D.chmod :postfix /mail
+
+正确答案：B
+
+chmod无法修改归属关系，groupmod修改组账号属性的命令
+
+25.(单选题)在Linux系统中，执行 tar -zcf bak.tar.gz /etc /boot 操作的作用
+是（ ）
+ A.压缩/etc/文件夹下的所有信息
+ B.备份/etc和/boot文件夹到bak.tar.gz
+ C.解压bak.tar.gz所有信息解压到/etc和/boot文件夹下
+ D.命令的语法有错
+
+正确答案：B
+
+本题考查tar命令格式，B选项正确
+
+26.(单选题)使用tar命令打包文档时如果包的结尾是.tar.xz那么打包时用（ ）选项
+ A.-zcf
+ B.-jcf
+ C.-Pzcf
+ D.-Jcf
+
+正确答案：D
+
+-zcf归档文件为.tar.gz，-jcf归档文件为.tar.bz2，-P代表绝对
+
+路径归档
+
+27.(单选题)计划任务的配置格式是（）
+ A.分 时 日 月 周 任务命令行
+ B.日 月 周 分 时 任务命令行
+ C.时 分 日 月 周 任务命令行
+ D.周 月 日 时 分 任务命令行
+
+正确答案：A
+
+计划任务的时间格式为：分 时 日 月 周
+
+28.(单选题)对于IP地址的分类，C类IP地址的范围（ ）
+ A.190至223
+ B.191至223
+ C.192至223
+ D.192至224
+
+正确答案：C
+
+IP地址分类A类为1-127，B类为128-191，C类为192-223，
+
+D类为224-239，E类为240-254
+
+29.(单选题)在Linux系统中，MBR分区模式第四块SCSI硬盘中的第三个逻辑分区
+表示为（ ）
+ A./dev/hda3
+ B./dev/sdd3
+ C./dev/sdc7
+ D./dev/sdd7
+
+正确答案：D
+
+在MBR分区模式中，分区方案为前三个为主分区，第四个为扩展
+
+分区，第一逻辑分区为第五个分区，依次类推第七个分区为第三个逻辑
+
+分区
+
+30.(单选题)MBR分区最大支持多少个主分区( )
+ A.3个
+ B.128个
+ C.64个
+ D.4个
+
+正确答案：D
+
+MBR分区表在硬盘中占用64字节空间，而每个主分区需要占用
+
+16字节空间，所以至多有4个主分区
+
+31.(单选题)在Linux系统中配置httpd服务器时，设置项（ ）用来指定默认的网页
+存放位置
+ A.ServerName
+ B.DocumentRoo
+ C.ServerAdmin
+ D.ServerRoot
+
+正确答案：B
+
+A选项指定的网站域名，C选项指定管理员的邮箱，D选项指
+
+定httpd配置文件根路径
+
+32.(单选题)管理员若要为普通账户bob设置周期性计划任务，可以执行（ ）
+ A.crontab -r -u bob
+ B.crontab -l -u bob
+ C.crontab -e -u bob
+ D.crontab -e
+
+正确答案：C
+
+-r为删除计划任务，-l为查看计划任务，而D选项没有指定用户
+
+33.(单选题)执行命令chmod -R ug=rw /tmp/test/ ，其结果是（ ）
+ A.将/tmp/test文件夹的属主和属组权限设置成读取和写入的权限
+ B.将/tmp/test文件夹的属主和其他人权限设置成读取和写入的权限
+ C.所有人一定可以访问/tmp/test这个文件夹
+ D.属组的成员用户一定可以进入/tmp/test这个文件夹
+
+正确答案：A
+
+该命令为修改所有者与所属组权限，未提及其他人权限，无法断
+
+定其他人权限，能否进入目录只和x执行权限是否有关，本题未透露任何
+
+与x权限有关的信息
+
+34.(单选题)使用vim编辑文件时，若要将第7到10行的内容一次性删除，可以在
+命令模式下先将光标移动到第7行，再使用（ ）按键命令
+ A.dd
+ B.4dd
+ C.de
+ D.4de
+
+正确答案：B
+
+A选项删除一行，C选项删除光标后一部分一般以冒号或空格
+
+界定，D选项也无法删除行
+
+35.(单选题)在Linux系统中从源代码安装软件时，编译的过程由（ ）操作完成
+ A../configure
+ B.make
+ C.make all
+ D.make install
+
+正确答案：B
+
+A选项为配置源码包功能或指定安装路径，C选项没有此操作，
+
+D选项为安装源码包
+
+36.(多选题)快速构建WSGI动态网站是需要安装那些包（ ）
+ A.httpd
+ B.MYSQL
+ C.PHP
+ D.mod_wsgi
+
+正确答案：AD
+
+httpd软件为Web服务器，mod_wsgi为提供Python代码的
+
+识别转义
+
+37.(多选题)以下（ ）属于Linux发行版本
+ A.Red Hat Enterprise Linux
+ B.IBM AIX
+ C.Windows Server 2008
+ D.CentOS
+
+正确答案：AD
+
+
+38.(多选题)selinux切换运行模式的方法（ ）
+ A.临时切换：setenforce 1或0
+ B.临时切换：getenforce 1或0
+ C.固定配置：/etc/selinux/config 文件
+ D.固定配置：/etc/selinux/selinux.cnf
+
+正确答案：AC
+
+修改SELinux模式，两个方面临时修改与固定修改，临时修改
+
+通过命令setenforce而getenforce为查看不能达到修改，固定修改
+
+需要修改/etc/selinux/config 文件
+
+39.(多选题)在Linux系统中，执行（ ）命令可以查看网关记录
+ A.hostname
+ B.route –n
+ C.arp –n
+ D.route
+
+正确答案：BD
+
+hostname 查看主机名，route –n以数字方式显示路由表，
+
+路由表中有网关记录，route直接显示路由表，arp实现mac地址与ip
+
+地址对应关系
+
+40.(多选题)关于Linux系统的常见目录，以下描述正确的是（ ）
+ A./boot目录用来存放启动相关文件
+ B./root目录是所有用户的家目录
+ C./tmp是临时目录
+ D./dev目录用来存放配置文件
+
+正确答案：AC
+
+B选项为管理员root的家目录，D选项为存放设备文件
+
+41.(多选题)规范shell的一般组成( )
+ A.#!环境声明
+ B.#注释文本
+ C.可执行代码
+ D.if判断
+
+正确答案：ABC
+
+D选项if判断属于Shell脚本的功能
+
+42.(多选题)在vim编辑器的（ ）工作模式中可以实现保存退出的操作
+ A.修改模式
+ B.输入模式
+ C.命令模式
+ D.末行模式
+
+正确答案：CD
+
+命令模式可以利用ZZ，末行模式为：wq
+
+43.(多选题)selinux的运行模式有（ ）
+ A.disable
+ B.enable
+ C.enforcing
+ D.permissive
+
+正确答案：ACD
+
+SELinux无enable模式
+
+44.(多选题)vim编辑器中调到首行的快捷键是( )
+ A.GG
+ B.gg
+ C.1G
+ D.1g
+
+正确答案：BC
+
+A选项跳转到末行，D选项1g无作用
+
+45.(多选题)安装源码包时需要安装编译工具有（ ）
+ A.C++
+ B.g++
+ C.gcc
+ D.make
+
+正确答案：CD
+
+A选项无此软件包，B选项无此软件包
+
+46.(多选题)常见的数据库软件有（ ）
+ A.DB2
+ B.SQL Server
+ C.MySQL
+ D.virtualbox
+
+正确答案：ABC
+
+
+47.(多选题)在Linux系统中，用户root依次执行下列操作： 
+chmod 777 /dir；chmod o+t /dir；touch /dir/root.file ， 
+则可知（ ）
+ A.普通账户可以在/dir目录下创建文件
+ B.普通账户可以删除在/dir目录下自己创建的文件
+ C.普通账户可以删除文件root.file
+ D.普通账户可删除/dir目录下的所有文件
+
+正确答案：AB
+
+权限为777说明其他人具备rwx，所以可以新建文档，但由于
+
+有t权限，该权限限制删除非本人的文档，所以CD选项均错误
+
+48.(多选题)关于Linux命令行环境的通配符，以下描述正确的是（ ）
+ A.* 匹配单个字符
+ B.？匹配任意多个字符
+ C.[a-z] 匹配连续多个字符a-z中的一个
+ D.{a,min,xy} 分别匹配不连续的a,min,xy多组字符
+
+正确答案：CD
+
+*匹配任意多个字符，？匹配单个字符
+
+49.(多选题)Apache虚拟主机的类型包括（ ）
+ A.基于路由的虚拟主机
+ B.基于域名的虚拟主机
+ C.基于ip的虚拟主机
+ D.基于端口的虚拟主机
+
+正确答案：BCD
+
+虚拟Web主机没有基于路由的类型
+
+50.(多选题)如何永久配置用户主机名( )
+ A.修改/etc/hostname文件
+ B.使用命令 hostnamectl set-hostname 主机名
+ C.hostname 主机名
+ D.host 主机名
+
+正确答案：AB
+
+修改配置文件/etc/hostname可以，利用hostnamectl 
+
+set-hostname命令也可以
