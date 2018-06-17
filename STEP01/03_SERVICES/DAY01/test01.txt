@@ -1,0 +1,123 @@
+1.(多选题)关于ssh客户端的操作，以下错误的是（ ）。
+ A.格式可以为ssh [选项]... 服务器
+ B.格式可以为ssh [选项]... 服务器@用户名
+ C.可以使用-p选项连接到指定端口
+ D.可以使用-x选项在本机上运行对方的图形程序
+
+2.(多选题)关于分区工具parted与fdisk，下列说法正确的是（）。
+ A.parted只支持GPT分区模式
+ B.parted既支持交互模式，有支持非交互模式
+ C.fdisk只支持MBR分区模式
+ D.fdisk既支持交互模式，有支持非交互模式
+
+3.(多选题)执行操作
+	# mkdir  /stdir
+	# chmod 777 /stdir
+	# chmod  o+t  /stdir
+	# touch  /stdir/root.file
+	则可知（ ）。
+	A.普通账户可以在/stdir目录下创建文件
+	B.普通账户可以删除在/stdir目录下自己创建的文件
+	C.普通账户可以删除文件root.file
+	D.普通账户可删除/stdir目录下的所有文件
+
+4.(单选题)关于网卡配置文件的说法，正确的是（ ）。
+	A.DEVICE=eth0表示设备名，其中DEVICE可以小写
+	B.BOOTPROTO=none表示获取IP地址的方式，不是动态获得时只能用none
+	C.ONBOOT=yes表示随network启动
+	D.GATEWAY=192.168.8.1 网关必须设置
+
+5.在每天凌晨1:30由系统自动将目录“/images”中的内容压缩备份到“/bak”目录下，可以设置cron任务:____
+
+6.(单选题)在RHEL6中系统中.默认使用（ ）作为缺省的文件系统类型。
+	A.FAT32
+	B.NTFS
+	C.EXT4
+	D.Reiserfs
+
+7.(单选题)想把一个用户加入到组下的命令是什么 （ ）。
+ A.#gpasswd -a 组名 用户名
+ B.#gpasswd -add 用户名 组名
+ C.#gpasswd -in 用户名 组名
+ D.#gpasswd -a 用户名 组名
+
+8.(单选题)选出代表分区概念中第二块SCSI硬盘中第三个逻辑分区的表示方式 ( )。
+ A./dev/hdb3
+ B./dev/sda3
+ C./dev/sdb3
+ D./dev/sdb7
+
+9.(单选题)在RHEL6中，当执行“ll”命令时会看到和执行“ls -l”命令同样的输出结果，这是因为（ ）。
+ A.ll是以长格式显示文件或目录的一个特殊命令
+ B.ll是指向ls命令的一个特殊符号链接
+ C.ll是通过alias命令设置的简化ls –l操作的命令别名
+ D.ll是Linux系统内核中的一个特殊函数
+
+10.(单选题)如果文档有几十万字,不过是2009年的,如果想把年份全都换成2010年需要用最快的方法怎么做（ ）。
+ A.:/2009/2010/g
+ B.:/2009/2010/all
+ C.:s/2009/2010/g
+ D.:%s/2009/2010/g
+
+11.(单选题)vim中的尾行模式中的set nu的意思是什么（ ）。
+ A.设置行号
+ B.修改内容
+ C.显示行号
+ D.查询内容
+
+12.(单选题)YUM仓库配置文件后缀名是（ ）。
+ A..repo
+ B..conf
+ C..txt
+ D..rpm
+
+13.(单选题)在RHEL6系统中，若在“/etc/shadow”文件内jerry用户的密码字串前添加“!!”字符，将导致（ ）结果。
+ A.jerry用户不需要密码即可登录
+ B.jerry用户的账号被锁定，无法登录
+ C.jerry用户可以登录，但禁止修改自己的密码
+ D.jerry用户的有效登录密码变为“x”
+
+14.(单选题)对于/etc/passwd中 ，
+	student:x:600:1213::/home/student:/bin/bash
+	每个字段意思
+
+15.(单选题)rpm -ivh --nodeps gcc.rpm 这条命令的作用是什么（ ）。
+ A.删除gcc.rpm这个包
+ B.安装gcc.rpm这个包
+ C.强制安装gcc.rpm这个包
+ D.不安装依赖关系来安装gcc.rpm这个包
+
+16.(多选题)YUM软件仓库提供的方式有哪些（ ）。
+ A.file://
+ B.ftp://
+ C.http://
+ D.nfs://
+
+17.(多选题)Linux的内核具有开发版和稳定版两种，下面（ ）版本的Linux内核属于稳定版。
+ A.2.2.11
+ B.2.6.18
+ C.2.5.2
+ D.2.1.129
+
+18.(多选题)下面命令中哪个是命令的帮助方法（ ）。
+ A.不会的命令 --help
+ B.man 不会的命令
+ C.sos 不会的命令
+ D.help 不会的命令
+
+19.(单选题)写出要查看系统中至少20M文件的信息（ ）。
+ A.#find / -type 20M
+ B.#find / -daxiao 20M
+ C.#find / -max +20M
+ D.#find / -size +20M
+
+20./etc/sysconfig/network-script/ifcfg-eth0里重要内容讲解
+	TYPE=Ethernet
+	BOOTPROTO=none
+	IPV6INIT=yes
+	NAME=eth0
+	UUID=4f5f8b5d-4b51-4e1c-98c7-40f0eb90f241
+	DEVICE=eth0
+	ONBOOT=yes
+	IPADDR=192.168.4.7
+	PREFIX=24
