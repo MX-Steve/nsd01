@@ -1,0 +1,214 @@
+/etc/my.cnf
+	[mysqld]
+	default-storage-engine=InnoDB(默认,可以改成别的)
+systemctl restart mysqld
+常用存储引擎的特点:
+InooDB支持事务回滚和外键;行锁
+MyISAM:不支持事务回滚和外键;表锁
+事务:从开始访问到断开连接的过程[数据访问的过程]
+事务回滚:连接后,操作失败时,恢复操作之前的所有操作
+行锁:只给表中被访问的行加锁,没有被访问的不加锁
+表锁:只要对表做访问,无论访问一行,还是几行,都会把整张表锁上
+
+锁:解决并发访问冲突问题
+读锁:select[共享锁]
+写锁:insert update delete[排他锁,互斥锁]
+
+
+建表时根据特点决定使用哪种引擎
+写操作多的用InnoDB
+查询操作多的用MyISAM,支持表级锁,只锁一次,节省系统资源
+
+================================
+事务特点,如何恢复的?
+事务特性:ACID,原子性,一致性,隔离性,持久性
+============================
+自动提交功能
+mysql> show variables like "autocommit";
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| autocommit    | ON    |
++---------------+-------+
+mysql> set autocommit=off;
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| autocommit    | OFF   |
++---------------+-------+
+1 row in set (0.00 sec)
+
+mysql> delete from t36;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from t36;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from t36;
++------+
+| id   |
++------+
+|    2 |
++------+
+1 row in set (0.00 sec)
+
+
+mysql> delete from t36;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from t36;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from t36;
+Empty set (0.00 sec
+===========================
+支持事务的表有对应的事务日志文件记录执行过的sql操作==>/var/lib/mysql/ib_logfile0和ib_logfile1和ibdata1
+
+
+create table t37(id int)engine=innodb;
+==>t37.frm : 37表中的表结构 : desc t37;
+==>t37.ibd : 37表中的数据和索引
+
+create table t38(id int)engine=myisam;
+==>t38.frm : 38表中的表结构 : desc t38;
+==>t38.MYD : 38表中的数据
+==>t38.MYI : 38表中的表索引
+
+=============================================
+数据导入:系统文件内容放入数据库表中
+数据导入导出时存放文件的目录:/var/lib/mysql-files
+show variables like "secure_file_priv"
+create table user1(
+     name char(30),
+     password char(1),
+     uid int,
+     gid int,
+     comment char(100),
+     homedir char(150),
+     shell char(50),
+     index(name)
+    );
+导入
+mysql> load data 
+	infile '/var/lib/mysql-files/passwd' 
+	into table user1 
+	fields terminated by ":" 
+	lines terminated by "\n";
+mysql> alter table user1 add id int primary key auto_increment first;
+mysql> select * from user1;
+=============================================
+自定义导入导出目录	
+mkdir /mydata
+chown mysql /mydata
+vim /etc/my.cnf
+[mysqld]
+secure_file_priv="/mydata"
+[root@mysql50 mysql]# systemctl restart mysqld
+mysql> show variables like "secure_file_priv";
+mysql> alter table user1 drop id;
+mysql> load data 
+	infile '/mydata/passwd' 
+	into table user1 
+	fields terminated by ":" 
+	lines terminated by "\n";
+
+自定义导出
+禁用selinux,查什么,导什么
+mysql> select * from user1 into outfile "/mydata/user" fields terminated lines terminated by "\n";
+
+==================================
+mysqld启动不了报错检查
+rm -rf /var/lib/mysql/*
+mv /etc/my.cnf /etc/my.cnf.bak
+mysql_install_db --datadir=/var/lib/mysql --user=mysql
+================================
+条件:
+	1.基本条件
+		数值比较
+		字符比较
+		非空与空
+		逻辑比较:多个匹配条件
+			同时匹配 and逻辑与
+			某个匹配 or逻辑或
+			取反	! 或者 not 逻辑非
+			and和or同时出现,先看and,再看or
+				select * from user1 where name='lisi' or uid=1 and homedir='root'
+				select * from user1 where (name='lisi' or uid=1) and homedir='root'
+		范围内比较
+			select * from user1 where name in ("lisi","zhangsan","root");
+			select * from user1 where uid in (10,20,34,250);
+			select * from user1 where shell not in ("/bin/bash","/sbin/nologin");
+			select * from suer1 where id between 10 and 25;
+			select DISTINCT shell from user1 ; //取重
+匹配空与非空			
+mysql> select * from user1 where homedir is null ;
+mysql> select * from user1 where homedir is not null ;
+
+	2.高级匹配
+		模糊匹配
+			like
+				_ 匹配单个字符
+				% 匹配多个字符[0个或者多个]
+					mysql> select * from user1 where name like 'r_t';
+					mysql> select * from user1 where name like '%a%';
+		正则匹配
+			regexp '正则表达式'
+				. ^ $ [] *
+				mysql> select name from user1 where name regexp '^a';
+				mysql> select name from user1 where name regexp 'a';
+				mysql> select name from user1 where name regexp '[0-9]';
+				mysql> select name from user1 where name regexp '^[0-9]';
+				mysql> select name from user1 where name regexp '[0-9]$';
+				mysql> select uid,name from user1 where uid regexp '...';
+				mysql> select uid,name from user1 where uid regexp '^...$';
+				mysql> select uid,name from user1 where name regexp '^r.*t$';
+		四则运算
+			update , select
+			+ - * / %
+				mysql> select uid+1 , name from user1 where uid >=10 and uid <=20;
+				mysql> select name,2018-age s_year from user1 where name='root';
+		聚集函数
+			avg
+			sum
+			min
+			max
+			count	
+		过滤查询结果
+			having
+				mysql> select name from user1 where shell='/bin/bash' having name='lisi';
+				mysql> select name from user1 where shell='/bin/bash' having name in ('mysql','root');
+				mysql> select name from user1 where id <=20 having name is null;
+ 		限制查询结果显示行数
+			limit
+				mysql> select name from user1 limit 20;显示前20行 [从0开始]
+				mysql> select name from user1 limit 10,5;从第10行开始,显示5行[从第11行开始]
+				mysql> select name from user1 order by gid limit 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
