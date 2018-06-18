@@ -140,7 +140,7 @@ skip-grant-tables
 mysql> select  host,user,authentication_string  from mysql.user;
 mysql> 
 update  mysql.user 
-set  authentication_string=password("abc123")
+set  authentication_string=password("abc123")  ==>password()是mysql内置函数，对密码加密
 where
 host="localhost"  and  user="root";
 
