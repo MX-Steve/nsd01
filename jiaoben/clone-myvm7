@@ -1,0 +1,12 @@
+#!/bin/bash
+read -p "请输入主机名:" Hostname
+CentosDemoXml="/root/demo.xml"
+CentosDemoQcow2="node.qcow2"
+cp $CentosDemoXml /etc/libvirt/qemu/${Hostname}.xml
+sed -i  's,###,'${Hostname}',' /etc/libvirt/qemu/${Hostname}.xml
+cd /var/lib/libvirt/images/
+qemu-img create -b ${CentosDemoQcow2} -f qcow2 ${Hostname}.img
+virsh define /etc/libvirt/qemu/${Hostname}.xml
+virsh start ${Hostname}
+echo "虚拟主机${Hostname}创建成功！"
+
