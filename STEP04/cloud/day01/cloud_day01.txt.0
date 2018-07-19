@@ -1,0 +1,364 @@
+day01：cloud-kvm构建及管理 virsh控制工具 镜像管理 虚拟机快键技术
+0.源码包-->rpm-->自定义yum源
+	1.制作rpm
+		1.安装rpm编译工具
+			yum -y install rpm-build
+		2.安装各种源码包编译工具
+			yum -y install gcc gcc-c++ make pcre-devel zlib-devel...
+		3.生成rpmbuild目录以及子目录
+			rpmbuild nginx.spec ==>此时报错没有关系，为了生成目录的
+			vim nginx.spec ==>编写配置
+				Name:nginx
+				Version:1.12.2
+				Source0:nginx-1.12.2.tar.gz
+				#BuildRequires:    
+				#Requires:
+				%build
+				./configure
+				%files
+				%doc
+				/usr/local/nginx/*
+				%changelog
+			[没写的默认即可]
+		4.rpmbuild nginx.spec ==>RPM里就已经生成rpm包了
+	2.将rpm制作成自定义yum源
+		1.创建yum源目录
+			mkdir tools
+			cp xx.rpm tools [此处拷贝各种自定义rpm包]
+			cd tools
+			createrepo .		 ==> 创建rpm名称列表[创建新的]
+			如果已经有了rpm了，执行下面
+			createrepo --update .	 ==> [更新rpm名称列表]
+		2.配置yum源
+			vim /etc/yum.repos.d/tools.repo
+				[tools]
+				name=tools
+				baseurl=file:///tools
+				enabled=1
+				gpgcheck=0
+		3.测试yum是否可用
+			yum clean all
+			yum repolist
+			yum -y install xxx
+1.搭建8.1G的centos的yum源:开机自动挂载
+	mkdir /var/ftp/centos7
+	vim /etc/fstab
+		/root/centos7-...iso /var/ftp/centos7 iso9660 defaults 0 0
+	vim /etc/yum.repos.d/centos7.repo
+		[centos7]
+		name=centos7
+		baseurl=ftp://176.4.16.101:/centos7
+		enabled=1
+		gpgcheck=0
+	yum clean all
+	yum repolist ==>九千多个包出来就行
+2.创建
+	0.环境准备
+		1.关闭NetworkManager服务
+			systemctl stop NetworkManager
+			systemctl disable NetworkManager
+		2.禁用selinux
+			vim /etc/selinux/config ==> disabled ==>重启生效
+		3.卸载防火墙 ：含有firewalld的软件包都要卸载
+			yum remove firewalld-filesystem
+			yum remove python-firewall
+		4.开启路由转发功能
+			vim /etc/sysctl.d/70-sysctl.conf
+				net.ipv4.ip_forward=1
+		
+	1.创建网桥-配置文件
+		cd /etc/libvirt/qemu/networks/autostart
+		vim centos7.0.xml
+			<network>
+				<name>vbr</name>
+				<forward mode="nat" />
+				<bridge name="vbr"/>
+				<ip address="192.168.1.254" netmask="255.255.255.0" >
+					<dhcp>
+						<range start="192.168.1.100" end="192.168.1.200" />
+					</dhcp>
+				<ip>	
+			</network>
+	2.激活启用网桥
+		virsh net-define vbr.xml
+		virsh net-start vbr ==>启动，执行后ifconfig就可以看到vbr网桥
+		virsh net-autostart vbr  开机自启
+	3.创建存储空间
+		cd /var/lib/libvirt/images
+		qemu-img create -f qcow2 node.qcow2 16G
+		ls --> node.qcow2
+3.安装操作系统
+	网络引导安装
+	地址：ftp://176.4.16.101:/centos7
+	CPU:2,内存：2048
+	语言：英语
+	时区：上海
+	软件包：Mini
+	空间：选择创建的node.qcow2
+	分区：手动 ==> / 只要根分区
+	standard Partition
+		+ --> / --> 添加 --> 应用改变
+	kdump:关闭
+	开始
+	设置root密码
+	等待安装结束
+4.安装完后做系统配置 [虚拟机]
+	1.配置yum源
+		cd /etc/yum.repos.d/
+		rm -rf centos*.repo
+		vi local.repo
+			[local_repo]
+			name=local_repo
+			baseurl=ftp://192.168.1.254/centos7
+			enabled=1
+			gpgcheck=1 ==>有签名！！！
+		yum repolist ==>9591个包
+	2.安装常用软件包
+		yum provides ifconfig ==> net-tools ==> ifconfig 和 netstat
+		yum -y install net-tools
+	
+		yum provides vim  ==> vim-enhanced
+		
+		yum provides ip  ==> iproute
+
+		tab健补齐 bash-completion
+
+	4.测试：选vbr
+		ping www.baidu.com ==>可以ping通
+		如果ping不通：以下为解决方案
+		1.卸载NetworkManager相关包
+			rpm -qa | grep -i network 
+			yum remove NetworkManager
+			yum remove NetworkManager-libnm
+		
+		2.添加网关
+			ip route add default via 192.168.1.254
+		3.配置DNS解析
+			DNS服务器：cat /etc/resolve.cnf ==> nameserver 176.4.20.2
+		4.如果没选vbr，手工改
+			物理机：virsh list ==>找到对应的虚拟机，关机
+			cd /etc/libvirt/qemu/
+			vim node1.xml [虚拟机同名文件]
+				<mac address="52:43:.." />
+				<network name="vbr" /> ==>改成vbr
+			保存退出启动==>虚拟机即可上网
+		5.查看vbr.xml网桥配置是否正确
+			cat /etc/libvirt/qemu/networks/vbr.xml
+			如果有错误，改正，关掉重启
+			virsh net-destory vbr
+			virsh net-start vbr
+			brctl show
+	`		ifconfig vbr
+5.防火墙和selinux设置 [虚拟机]
+	1.卸载防火墙
+		yum list | grep firewall ==>卸载防火墙相关包
+	2.禁用selinux
+		vim /etc/selinux/config
+			disabled
+6.禁用空路由 /etc/sysconfig/network
+	NOZEROCONF="yes" ==>禁止掉169.254.0.0的默认路由
+	重启network服务
+	ip r ==> 地址169.254.0.0的默认路由已经不存在了
+==>此时真机无法console 到刚刚建立的虚拟机，刚刚的虚拟机会作为模板
+	vim /etc/sysconfig/grub,在LINUX行添加
+		GRUB_CMDLINE_LINUX="... .... console=tty0 console=ttyS0,115200n8"
+	grub2-mkconfig -o /boot/grub2/grub.cfg
+	重启虚拟机
+	启动后console就可以连接了
+	virsh list
+	virsh console node1
+	vim /etc/sysconfig/network-script/ifcfg-eth0
+		删除uuid和mac地址等，只留下最基本的配置
+		DEVICE="eth0"
+		ONBOOT="yes"
+		IPV6INT="no"
+		IPV4_FAILURE_FATAL="no"
+		NM_CONTROLLED="no"
+		TYPE="Ethernet"
+		BOOTPROTO="dhcp"
+	关机 [虚拟机模板]
+7.真机操作
+	cd /etc/libvirt/qemu
+	[root@room9pc01 qemu]# cp centos7.xml{,.bak}
+	[root@room9pc01 qemu]# virsh undefine centos7
+	[root@room9pc01 qemu]# mv centos7.xml.bak /root/centos7.xml
+	[root@room9pc01 qemu]# vim /root/centos7.xml
+<domain type='kvm'>
+  <name>###</name>
+  <memory unit='KiB'>2097152</memory>
+  <currentMemory unit='KiB'>2097152</currentMemory>
+  <vcpu placement='static'>2</vcpu>
+  <os> ==》系统配置
+    <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
+    <boot dev='hd'/>
+  </os>
+  <features> ==》电源
+    <acpi/>
+    <apic/>
+  </features>
+  <cpu mode='custom' match='exact' check='partial'>
+    <model fallback='allow'>Nehalem</model>
+  </cpu>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled='no'/>
+    <suspend-to-disk enabled='no'/>
+  </pm>
+  <devices>
+    <emulator>/usr/libexec/qemu-kvm</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/var/lib/libvirt/images/###.img'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <controller type='pci' index='0' model='pci-root'/>
+    <controller type='virtio-serial' index='0'>
+    </controller>
+    <interface type='network'>
+      <source network='vbr'/>
+      <model type='virtio'/>
+    </interface>
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+    <channel type='unix'>
+      <target type='virtio' name='org.qemu.guest_agent.0'/>
+    </channel>
+    <channel type='spicevmc'>
+      <target type='virtio' name='com.redhat.spice.0'/>
+    </channel>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <memballoon model='virtio'>
+    </memballoon>
+  </devices>
+</domain>
+8.创建虚拟机
+	1.创建虚拟机配置文件
+		cp centos7.xml xixi1.xml
+		vim xixi1.xml
+			<name>xixi1</name>
+			<source file="/var/lib/libvirt/images/xixi1.img">
+		保存退出
+	2.创建虚拟机磁盘文件
+		cd /var/lib/libvirt/images/
+		[root@room9pc01 images]# qemu-img create -b centos7.0-2.qcow2 -f qcow2 xixi1.img
+	3.启用虚拟机并测试
+		[root@room9pc01 images]# cd /etc/libvirt/qemu/
+		[root@room9pc01 qemu]# virsh define xixi1.xml
+		[root@room9pc01 qemu]# virsh start xixi1
+		[root@room9pc01 qemu]# virsh console xixi1
+
+快速创建
+	cd /etc/libvirt/qemu
+	sed 's,###,node2,' demo.xml >node2.xml
+	cd /var/lib/libvirt/images/
+	for i in node2 node3
+	do
+		qemu-img create -b node.qcow2 -f qcow2 ${i}.img
+	done
+	virsh define /etc/libvirt/qemu/node2.xml
+	virsh start node2
+	virsh list
+qcow2:
+	写时复制文件	
+
+
+====================================
+如何管理服务器：
+	源码包==>rpm包
+	1M外网带宽：900/月
+
+===================================
+网络 yum 源
+	1.安装FTP
+		yum -y install vsftpd
+		vim /etc/vsftpd/vsftpd.conf
+			listen=YES
+			listen_ipv6=NO
+		systemctl restart vsftpd
+		yum -y install lftp ==>
+		lftp:
+			lftp ip [-u 用户名] 默认连接ftp服务
+
+			lftp sftp://ip -u 用户名 默认连接ssh服务
+				支持ssh，tab键,get 下载
+	2.mount iso
+
+	3.创建自定义yum源
+	./eip 10
+转发 dns 安装配置
+	转发 dns 安装配置
+	yum install -y bind-chroot
+	配置文件 /etc/named.conf
+	options {
+		listen-on port 53 { 192.168.1.10; };
+		//listen-on-v6 port 53 { ::1; };
+		allow-query     { any; };
+		forwarders { 202.106.196.115; };
+		dnssec-enable no;
+		dnssec-validation no;
+	};
+时间服务器 ，server ， client
+	yum -y install chrony
+	vim /etc/chrony.conf
+	server time5.aliyun.com  iburst
+	bindacqaddress 0.0.0.0
+	allow 0/0
+	客户端配置没有后面两行
+
+shell 命令 exec 重定向
+==================================
+kvm:虚拟化技术
+	lsmod | grep kvm ==>kvm模块
+	必备软件：
+		qemu-kvm
+		libvirt-daemon
+		libvirt-client
+		libvirt-daemon-driver-qemu
+	可选软件:
+		virt-install
+		virt-manager
+		virt-v2v
+		virt-p2v
+qemu-img:
+	create -f qcow2 node.img 16G
+	create -b disk.img -f qcow2 disk1.img
+	info	node.img
+===========================================================
+virsh: 管理虚拟网络
+	net-define:根据xml创建网络设备
+		net-define /etc/libvirt/....xml
+	net-list --all:显示当前网络设备
+	net-destroy vbr 停止网络设备[关闭]
+	net-start vbr 启动网络设备[开启]
+	net-undefine vbr 删除，网络配置文件
+	net-info vbr 查看网桥信息
+	net-dumpxml vbr
+	net-autostart vbr 设置虚拟网络开机自动启动
+
+	连接本地
+	virsh -c qemu:///system
+	连接远程 ==> 管理远程服务器
+	virsh -c qemu+ssh://root@176.4.16.139:22/system ==>此处端口为ssh的端口
+
+虚拟机的组成：
+	KVM	:内核虚拟化模块
+	QEMU	:系统设备仿真
+	LIBVIRT	:虚拟机管理程序
+
+	XML[配置文件] <----> images[磁盘镜像文件]
+
+
+
+
+
+
+
+
+
