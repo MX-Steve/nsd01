@@ -1,0 +1,478 @@
+cloud-kvm构建及管理 virsh控制工具 镜像管理 虚拟机快键技术
+0.源码包-->rpm-->自定义yum源
+	0.从网上下载或者开发人员写了很多源码包
+	1.将源码包制作成rpm包
+		1.安装rpm编译工具
+			yum -y install rpm-build
+		2.安装各种源码包编译工具
+			yum -y install gcc gcc-c++ make pcre-devel zlib-devel ...
+		3.生成rpmbuild目录以及子目录
+			rpmbuild 软件名.spec ==>此时报错没有关系，会在当前目录生成rpmbuild目录以及其目录下的一些子目录
+			[以nginx为例]
+			vim nginx.spec ==>编写配置
+				Name:nginx
+				Version:1.12.2
+				Source:nginx-1.12.2.tar.gz
+				#BuildRequires:    
+				#Requires:
+				%build
+				./configure
+				%files
+				%doc
+				/usr/local/nginx/*
+				%changelog
+				[没写的默认即可]
+		4.rpmbuild nginx.spec ==>RPM里就已经生成rpm包了
+	2.将rpm制作成自定义yum源
+		1.创建yum源目录
+			mkdir tools
+			cp xx.rpm tools [此处拷贝各种自定义rpm包]
+			cd tools
+			createrepo .		 ==> 创建rpm名称列表[创建新的]
+			如果已经有了rpm了，执行下面
+			createrepo --update .	 ==> [更新rpm名称列表]
+		2.配置yum源
+			vim /etc/yum.repos.d/tools.repo
+				[tools]
+				name=tools
+				baseurl=file:///tools
+				enabled=1
+				gpgcheck=0
+		3.测试yum是否可用
+			yum clean all
+			yum repolist
+			yum -y install xxx
+1.搭建8.1G的CentOS7的yum源:开机自动挂载
+		yum -y install vsftpd
+		vim /etc/vsftpd/vsftpd.conf
+			listen=YES
+			listen_ipv6=NO
+		systemctl restart vsftpd
+		yum -y install lftp ==>
+		lftp:
+			lftp ip [-u 用户名] 默认连接ftp服务
+
+			lftp sftp://ip -u 用户名 默认连接ssh服务
+				支持ssh，tab键,get 下载
+	mkdir /var/ftp/CentOS7
+	vim /etc/fstab
+		/root/centos7-...iso /var/ftp/CentOS7 iso9660 defaults 0 0
+	vim /etc/yum.repos.d/centos7.repo
+		[centos7]
+		name=centos7
+		baseurl=ftp://176.4.16.101:/CentOS7
+		enabled=1
+		gpgcheck=1
+	yum clean all
+	yum repolist ==>九千多个包出来就行
+	到软件包里下载密码，导入秘钥
+	rpm --import 秘钥 ==>开启秘钥验证
+2.真机配置
+	0.环境准备
+		1.关闭NetworkManager服务
+			systemctl stop NetworkManager
+			systemctl disable NetworkManager
+			最好卸载NetworkManager
+		2.禁用selinux
+			vim /etc/selinux/config ==> disabled ==>重启生效
+		3.卸载防火墙 ：含有firewalld的软件包都要卸载
+			yum remove firewalld-filesystem
+			yum remove python-firewall
+			systemctl mask firewalld
+		4.开启路由转发功能
+			vim /etc/sysctl.d/70-sysctl.conf
+				net.ipv4.ip_forward=1	
+	1.创建网桥-配置文件==>用来桥接外网
+		cd /etc/libvirt/qemu/networks/autostart
+		vim centos7.0.xml
+			<network>
+				<name>vbr</name> ==>vbr:网桥名称
+				<forward mode="nat" />  ==>nat:网络地址转换，内网转换为公网地址
+				<bridge name="vbr"/> ==>指定为网桥设备
+				<ip address="192.168.1.254" netmask="255.255.255.0" >
+					<dhcp> ==>动态自动分配ip地址
+						<range start="192.168.1.100" end="192.168.1.200" />
+					</dhcp>
+				<ip>	
+			</network>
+	2.激活启用网桥
+		virsh net-define /etc/libvirt/qemu/network/vbr.xml
+		virsh net-start vbr ==>启动，执行后ifconfig就可以看到vbr网桥
+		virsh net-autostart vbr  开机自启
+		==>如果不想开机自启：virsh net-autostart --disable vbr
+	3.创建存储空间
+		cd /var/lib/libvirt/images
+		qemu-img create -f qcow2 node.qcow2 16G
+		node.qcow2-->做镜像模板使用
+	4.转发 dns 安装配置
+		转发 dns 安装配置
+		yum install -y bind-chroot
+		配置文件 /etc/named.conf
+		options {
+			listen-on port 53 { 192.168.1.10; };
+			//listen-on-v6 port 53 { ::1; };
+			allow-query     { any; };
+			forwarders { 202.106.196.115; };
+			dnssec-enable no;
+			dnssec-validation no;
+		};
+	5.时间服务器
+		yum -y install chrony
+		vim /etc/chrony.conf
+			server time5.aliyun.com  iburst
+			bindacqaddress 0.0.0.0
+			allow 0/0
+		chronyc sources -v ==>^*代表时间同步成功
+		客户端配置没有后面两行
+3.安装操作系统 ==>制作虚拟机模板
+	网络引导安装
+	地址：ftp://176.4.16.101:/CentOS7
+	CPU:2,内存：2048
+	语言：英语
+	时区：上海
+	软件包：Mini ==>294个包
+	空间：选择自己使用qemu-img创建的node.qcow2
+	分区：手动 ==> / 只要根分区
+	standard Partition
+		+ --> / --> 添加 --> 应用改变
+	kdump:关闭
+	开始
+	设置root密码
+	等待安装结束
+4.安装完后做系统配置 [虚拟机] ==>制作虚拟机模板
+	1.配置yum源
+		cd /etc/yum.repos.d/
+		rm -rf centos*.repo
+		vi local.repo
+			[local_repo]
+			name=local_repo
+			baseurl=ftp://192.168.1.254/CentOS7
+			enabled=1
+			gpgcheck=1
+		模板中启用秘钥验证
+		yum repolist ==>9051个包
+	2.安装常用软件包
+		ifconfig 和 netstat  ==> net-tools 
+		vim  ==> vim-enhanced
+		ip  ==> iproute
+		pstree  ==> psmisc
+		tab ==> bash-completion
+	3.测试：选vbr
+		ping www.baidu.com ==>可以ping通
+		如果ping不通：以下为解决方案
+		1.卸载NetworkManager相关包
+			rpm -qa | grep -i network 
+			yum remove NetworkManager
+			yum remove NetworkManager-libnm	
+		2.添加网关
+			法一:ip route add default via 192.168.1.254
+			法二:vim /etc/sysconfig/network
+				GATEWAY="192.168.1.254"
+			法三:vim /etc/sysconfig/network-script/ifcfg-eth0
+				...
+				GATEWAY=192.168.1.254
+		3.配置DNS解析
+			DNS服务器: nameserver 192.168.1.254 [真机]
+		4.如果没选vbr，手工改
+			物理机：virsh list ==>找到对应的虚拟机，关机
+			cd /etc/libvirt/qemu/
+			vim node1.xml [虚拟机同名文件]
+				<mac address="52:43:.." />
+				<network name="vbr" /> ==>改成vbr
+			保存退出启动==>虚拟机即可上网
+		5.查看vbr.xml网桥配置是否正确
+			cat /etc/libvirt/qemu/networks/vbr.xml
+			如果有错误，改正，关掉重启
+			virsh net-destory vbr
+			virsh net-start vbr
+			virsh net-edit vbr
+			brctl show
+			ifconfig vbr
+			virsh dumpxml node1
+			virsh edit 虚拟机名称
+5.防火墙和selinux设置 [虚拟机]
+	1.卸载防火墙
+		yum list | grep firewall ==>卸载防火墙相关包
+	2.禁用selinux
+		vim /etc/selinux/config
+			disabled
+6.禁用空路由 /etc/sysconfig/network
+	NOZEROCONF="yes" ==>禁止掉169.254.0.0的默认路由
+	重启network服务
+	ip r ==> 地址169.254.0.0的默认路由已经不存在了
+7.设置console登录许可
+	此时真机无法console 到刚刚建立的虚拟机，刚刚的虚拟机会作为模板
+	vim /etc/sysconfig/grub,在LINUX行添加
+		GRUB_CMDLINE_LINUX="biosdevname=0 net.ifnames=0 console=ttyS0,115200n8"
+		GRUB_DISABLE_LINUX_UUID="true"
+		GRUB_ENABLE_LINUX_LABEL="true"
+	grub2-mkconfig -o /boot/grub2/grub.cfg
+	重启虚拟机
+	启动后console就可以连接了
+	virsh list
+	virsh console node1
+8.配置网卡信息
+	vim /etc/sysconfig/network-script/ifcfg-eth0
+		删除uuid和mac地址等，只留下最基本的配置
+		*DEVICE="eth0"
+		*ONBOOT="yes"
+		*IPV6INT="no"
+		IPV4_FAILURE_FATAL="no"
+		NM_CONTROLLED="no"
+		*TYPE="Ethernet"
+		*BOOTPROTO="dhcp"
+		*:代表必须填
+	关机 [虚拟机模板]
+9.配置虚拟机xml文件
+	cd /etc/libvirt/qemu
+	[root@room9pc01 qemu]# cp centos7.xml{,.bak}
+	[root@room9pc01 qemu]# virsh undefine centos7
+	[root@room9pc01 qemu]# mv centos7.xml.bak /root/centos7.xml
+	[root@room9pc01 qemu]# vim /root/centos7.xml
+		<domain type='kvm'>
+		  <name>###</name>
+		  <memory unit='KiB'>2097152</memory>
+		  <currentMemory unit='KiB'>2097152</currentMemory>
+		  <vcpu placement='static'>2</vcpu>
+		  <os> ==》系统配置
+			<type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
+			<boot dev='hd'/>
+		  </os>
+		  <features> ==》电源
+			<acpi/>
+			<apic/>
+		  </features>
+		  <cpu mode='custom' match='exact' check='partial'>
+			<model fallback='allow'>Nehalem</model>
+		  </cpu>
+		  <on_poweroff>destroy</on_poweroff>
+		  <on_reboot>restart</on_reboot>
+		  <on_crash>destroy</on_crash>
+		  <pm>
+			<suspend-to-mem enabled='no'/>
+			<suspend-to-disk enabled='no'/>
+		  </pm>
+		  <devices>
+			<emulator>/usr/libexec/qemu-kvm</emulator>
+			<disk type='file' device='disk'>
+			  <driver name='qemu' type='qcow2'/>
+			  <source file='/var/lib/libvirt/images/###.img'/>
+			  <target dev='vda' bus='virtio'/>
+			</disk>
+			<controller type='pci' index='0' model='pci-root'/>
+			<controller type='virtio-serial' index='0'>
+			</controller>
+			<interface type='network'>
+			  <source network='vbr'/>
+			  <model type='virtio'/>
+			</interface>
+			<serial type='pty'>
+			  <target port='0'/>
+			</serial>
+			<console type='pty'>
+			  <target type='serial' port='0'/>
+			</console>
+			<channel type='unix'>
+			  <target type='virtio' name='org.qemu.guest_agent.0'/>
+			</channel>
+			<channel type='spicevmc'>
+			  <target type='virtio' name='com.redhat.spice.0'/>
+			</channel>
+			<input type='mouse' bus='ps2'/>
+			<input type='keyboard' bus='ps2'/>
+			<memballoon model='virtio'>
+			</memballoon>
+		  </devices>
+		</domain>
+10.创建虚拟机
+	1.创建虚拟机配置文件
+		cp centos7.xml xixi1.xml
+		vim xixi1.xml
+			<name>xixi1</name>
+			<source file="/var/lib/libvirt/images/xixi1.img">
+		保存退出
+	2.创建虚拟机磁盘文件
+		cd /var/lib/libvirt/images/
+		[root@room9pc01 images]# qemu-img create -b centos7.0-2.qcow2 -f qcow2 xixi1.img
+	3.启用虚拟机并测试
+		[root@room9pc01 images]# cd /etc/libvirt/qemu/
+		[root@room9pc01 qemu]# virsh define xixi1.xml
+		[root@room9pc01 qemu]# virsh start xixi1
+		[root@room9pc01 qemu]# virsh console xixi1
+
+11.快速创建虚拟机
+	cd /etc/libvirt/qemu
+	sed 's,###,node2,' demo.xml >node2.xml
+	cd /var/lib/libvirt/images/
+	for i in node2 node3
+	do
+		qemu-img create -b node.qcow2 -f qcow2 ${i}.img
+	done
+	virsh define /etc/libvirt/qemu/node2.xml
+	virsh start node2
+	virsh list
+	补充：qcow2:写时复制文件	
+kvm:虚拟化技术
+	lsmod | grep kvm ==>kvm模块
+	必备软件：
+		qemu-kvm
+		libvirt-daemon
+		libvirt-client
+		libvirt-daemon-driver-qemu
+	可选软件:
+		virt-install
+		virt-manager
+		virt-v2v
+		virt-p2v
+qemu-img:
+	create -f qcow2 node.img 16G
+	create -b disk.img -f qcow2 disk1.img
+	info	node.img
+===========================================================
+virsh: 管理虚拟网络
+	net-define:根据xml创建网络设备
+		net-define /etc/libvirt/....xml
+	net-list --all:显示当前网络设备
+	net-destroy vbr 停止网络设备[关闭]
+	net-start vbr 启动网络设备[开启]
+	net-undefine vbr 删除，网络配置文件
+	net-info vbr 查看网桥信息
+	net-dumpxml vbr
+	net-autostart vbr 设置虚拟网络开机自动启动
+
+	连接本地
+	virsh -c qemu:///system
+	连接远程 ==> 管理远程服务器
+	virsh -c qemu+ssh://root@176.4.16.139:22/system ==>此处端口为ssh的端口
+	virsh edit 虚拟机名称
+
+
+virt-manager:管理虚拟系统管理器
+	ssh-keygen -t rsa -b 2048 -N '' -f id_rsa
+	ssh-copy-id 176.4.16.139
+	KVM虚拟系统管理器-->文件-->添加连接-->连接到远程主机:用户名:root/主机名：:Taren1-->连接
+======================================================================================
+虚拟机的组成：
+	KVM	:内核虚拟化模块
+	QEMU	:系统设备仿真
+	LIBVIRT	:虚拟机管理程序
+
+	XML[配置文件] <----> images[磁盘镜像文件]
+
+
+======================================================
+====================
+三张光盘12个yum源
+==========================
+
+虚拟机 2 台，openstack(8G) ,nova(6G)
+openstack: 
+    pvcreate /dev/vdb
+    vgcreate cinder-volumes /dev/vdb
+
+openstack, nova:
+    yum install -y qemu-kvm \
+                   libvirt-client \
+                   libvirt-daemon \
+                   libvirt-daemon-driver-qemu \
+                   python-setuptools
+环境检查：
+  getenforce 
+  rpm -qa | grep firewalld
+  rpm -qa | grep Network
+  ping www.baidu.com
+  yum repolist
+  lsblk
+  vgs
+  vim /etc/yum.repos.d/local.repo 
+  virsh
+==========================
+物理机：
+	安装 bind（dns）服务
+	安装 chrond（ntp）服务
+
+openstack(8G),nova(6G)：
+    /etc/resolv.conf 配置 物理机的IP
+	nameserver 192.168.3.254
+    /etc/chrony.conf 配置指向物理机的IP
+	server 192.168.3.254 iburst
+    验证：
+	ping  www.baidu.com
+	chronyc sources -v
+
+openstack(8G),nova(6G)
+	yum install -y qemu-kvm \
+             libvirt-client \
+             libvirt-daemon \
+             libvirt-daemon-driver-qemu \
+             python-setuptools
+
+openstack(8G):
+	yum -y install openstack-packstack
+	packstack --gen-answer-file answer.ini
+
+修改配置文件answer.ini
+	 11 CONFIG_DEFAULT_PASSWORD=Taren1	配置默认密码	
+	 42 CONFIG_SWIFT_INSTALL=n	设置禁用 swift (对象存储) 模块
+	 75 CONFIG_NTP_SERVERS=192.168.3.254	NTP 服务器地址	
+	 
+	 98 CONFIG_COMPUTE_HOSTS=192.168.3.150 ==>计算节点IP地址
+	 102 CONFIG_NETWORK_HOSTS=192.168.3.150 ==>需要配置vxlan网络的 IP 地址
+
+	 554 CONFIG_CINDER_VOLUMES_CREATE=n	禁用自动创建 cinder-volumns 卷组
+	 840 CONFIG_NEUTRON_ML2_TYPE_DRIVERS=flat,vxlan	设置网络支持协议
+	 876 CONFIG_NEUTRON_ML2_VXLAN_GROUP=239.1.1.5	设置组播地址
+	 910 CONFIG_NEUTRON_OVS_BRIDGE_MAPPINGS=physnet1:br-ex	设置虚拟交换机
+	 921 CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:eth0	设置虚拟交换机所连接的物理网卡
+	 936 CONFIG_NEUTRON_OVS_TUNNEL_IF=eth1	设置隧道网络使用的网卡
+	 1179 CONFIG_PROVISION_DEMO=n	禁用测试的DEMO
+保存并开始安装openstack
+	[root@openstack ~]# packstack --answer-file=answer.ini
+
+horizon 软件配置 bug
+    修改 /etc/httpd/conf.d/15-horizon_vhost.conf
+    添加 WSGIApplicationGroup %{GLOBAL}
+    重新载入配置 apachectl graceful
+
+设置安全组：
+	新建，有入口和出口规则，应用在云主机上，实现openstack的防火墙规则
+	普通用户-->项目-->计算-->访问和安全-->新建
+	普通用户-->项目-->计算-->云主机数量-->对应虚拟机右侧下拉编辑安全组
+	原理：openstack通过neutron模块创建安全组，在云主机中生成iptables规则表
+	
+===============================================================
+错误锦集：
+1. [root@openstack ~]# growpart /dev/vda 1 ==>给vda1扩容时提示以下错误
+	unexpected output in sfdisk --version [sfdisk，来自 util-linux 2.23.2]
+   分析：执行:LANG=en_US.UTF-8 就可以了,不行可以重启下物理机试一下.(编码问题)
+   解决：
+	[root@openstack ~]# LANG=en_US.UTF-8
+	[root@openstack ~]# growpart /dev/vda 1
+	CHANGED: partition=1 start=2048 old: size=16775168 end=16777216 new: size=419428319,end=419430367 ==>解决了！
+2.通过br-ex所标识的网址，无法登录。cat账号密码，告诉我通过3网段进去
+   问题：http://192.168.3.129/dashboard [br-ex所表示的网址]
+   分析：br-ex指向错误,可能有两个或以上网卡可以上外网
+   解决：
+   	vim /root/keystonerc_admin ==>修改你想要的br-ex网段
+	source /root/keystonerc_admin
+	nova network-list
+4.模板机器没有保存ip配置时，重启没有ip和路由
+	解决：vim /etc/sysconfig/network-script/ifcft-eth0
+		DEVICE='eth0'
+5.创建云主机时状态为：错误
+	报错： 云主机 "n2" 执行所请求操作失败，云主机处于错误状态。: 请稍后再试 [错误: No valid host was found. There are not enough hosts available.].
+	原因：openstack管理机内存不足，要释放内存
+	解决：删除n2云主机，重启openstack，继续创建云主机
+6.安全组应用在主机上不生效？
+	解决：
+		方法1：重新编写安全组规则，重启openstack管理机器，启动后规则生效。【但是此方法不对所有机器有效】
+		方法2： vim /etc/sysctl.conf
+				net.ipv4.ip_forward=1
+				net.ipv4.conf.default.rp_filter=1
+				net.bridge.bridge-nf-call-ip6tables=1
+				net.bridge.bridge-nf-call-iptables=1
+				net.bridge.bridge-nf-call-arptables=1
+			/etc/init.d/network restart 【测试了以下，没什么卵用】
+7.创建好云主机后无法进入控制台
+
+
