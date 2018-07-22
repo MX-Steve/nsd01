@@ -1,0 +1,39 @@
+dd命令小结
+1.背景：
+	如果你想要把本地归档进行远程备份，从一个即将损坏的存储驱动器挽救数据，或者把一个别处的活动分区做个完整的副本，那么你需要知道如何安全可靠的复制驱动器和文件系统，dd命令绝对是最好的选择
+2.对驱动器和分区做个完整的副本
+	在使用dd命令时，如果输入了哪怕一个字母，也可能立即永久性的擦除掉整个磁盘驱动器里的所有重要的数据。因此，一定要注意命令的拼写格式规范
+3.dd命令的基本操作
+	1).为/dev/sda的整个磁盘数据创建精确的映象[空磁盘与sda大小相同]
+		dd if=/dev/sda of=/dev/sdb
+	2).对/dev/sda驱动器创建一个.img的映象文件，把它存到家目录里
+		dd if=/dev/sda of=/root/sdadisk.img
+	3).数据恢复：if与of后的值对换即可
+	4).使用ssh从远程驱动器创建一个压缩映象文件，并把该文件保存到你的本地计算机中.
+		ssh root@192.168.4.1 "dd if=/dev/sda | gzip -i -" | dd of=backup.gz
+	[注意]:要经常测试你的归档，如果是驱动，看是否能运行，如果是分区，看能不能挂载使用
+4.使用dd擦除磁盘数据
+	使用dd命令可以擦除磁盘数据，擦除后很难获取旧数据
+	dd if=/dev/zero of=/dev/sda1
+	或者
+	dd if=/dev/urandom of=/dev/sda1
+5.使用 dd 命令进行硬盘 I/O 性能检测
+	使用dd命令来测量服务器的吞吐率(写速度) 
+		dd if=/dev/zero of=/tmp/test1.img bs=1G count=1 oflag=dsync
+		[向test1.img写入1G大小的0存储]
+	使用dd命令测量服务器延迟 
+		dd if=/dev/zero of=/tmp/test2.img bs=512 count=1000 oflag=dsync
+		[写入1000次，查看每次之间的延迟]
+	hdparm命令来查看硬盘缓存的读速度:
+		[root@room9pc01 ~]# hdparm -Tt /dev/sda
+			/dev/sda:
+				Timing cached reads:   13714 MB in  2.00 seconds = 6862.19 MB/sec
+				Timing buffered disk reads: 530 MB in  3.00 seconds = 176.48 MB/sec
+6.监控dd的操作 <redhat中没有找到pv命令,未找到其他命令可以替代>
+	下载pv，源码编译安装,用来显示进度条[只做视觉参观，并不标准]
+	wget http://www.ivarch.com/programs/sources/pv-1.5.3.tar.bz2
+	由于磁盘或磁盘分区的归档可能需要很长的时间，因此你需要在命令中添加进度查看器。
+	安装管道查看器(在Ubuntu系统上安装命令为sudo apt install pv)，然后把pv命令和dd命令结合在一起。
+	dd if=/dev/urandom | pv | dd of=/dev/sda1
+	4MB 0:00:05 [<==>      ]
+	要想推迟备份和磁盘管理工作？有了dd工具，你会更容易。

@@ -1,0 +1,2 @@
+ACTION=='add', KERNEL=='sd[a-z]*', DRIVERS=="usb",
+SYMLINK+="UDISK%n"
