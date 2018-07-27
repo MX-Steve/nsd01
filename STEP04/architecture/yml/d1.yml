@@ -1,0 +1,8 @@
+---
+ - hosts: cache
+   remote_user: root
+   vars:
+    vvv: china
+   tasks:
+    - name: test var
+      debug: msg="The variable 'vvv' is {{ vvv }}"

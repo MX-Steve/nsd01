@@ -1,0 +1,12 @@
+---
+- hosts: web
+  remote_user: root
+  vars:
+    username: "lisi"
+  tasks:
+   - name: create user "{{username}}"
+     user: 
+       name: "{{username}}" 
+       group: users 
+   - shell: echo 123456 | passwd --stdin "{{username}}"
+   - shell: chage -d 0 "{{username}}"

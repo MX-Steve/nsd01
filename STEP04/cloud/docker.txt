@@ -1,0 +1,41 @@
+1 docker 安装
+#----------------------物理机--------------------------#
+创建一台 4G 内存的虚拟机
+创建虚拟机硬盘
+qemu-img create -b node.qcow2 -f qcow2 node1.img 20G
+创建虚拟机配置文件
+sed 's/demo/node1/' demo.xml >/etc/libvirt/qemu/node1.xml
+定义虚拟机
+virsh define /etc/libvirt/qemu/node1.xml
+编辑虚拟机修改内存
+virsh edit node1
+启动虚拟机
+virsh start node1
+
+创建自定义 yum 源
+拷贝 docker-engine*  /var/ftp/public
+cd /var/ftp/public
+createrepo  .
+
+#--------------------虚拟机--------------------#
+修改主机名和静态 ip 地址
+echo docker01 >/etc/hostname
+配置静态 ip 地址 /etc/sysconfig/network-scripts/ifcfg-eth0 
+BOOTPROTO="static"
+IPADDR="192.168.1.10"
+NETMASK="255.255.255.0"
+GATEWAY="192.168.1.254"
+
+配置 /etc/yum.repos.d/docker.repo
+[local_docker]
+name=CentOS docker
+baseurl="ftp://192.168.1.254/public"
+enabled=1
+gpgcheck=0
+
+安装 docker
+yum install docker-engine
+设置开机自启动
+systemctl enable docker
+重启虚拟机
+reboot

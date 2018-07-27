@@ -1,0 +1,20 @@
+---
+- hosts: web
+  remote_user: root
+  tasks:
+    - name: install the latest version of Apache
+      yum:
+        name: httpd
+    - lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        line: 'Listen 8080'
+    - lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^#ServerName'
+        line: 'ServerName www.web1.com:8080'
+    - shell: echo hello world > /var/www/html/index.html
+    - shell: systemctl restart httpd
+    - shell: systemctl enable httpd
+
+

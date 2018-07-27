@@ -1,0 +1,14 @@
+---
+- hosts: web1
+  remote_user: root
+  tasks:
+    - user:
+       name: "{{item.name}}"
+       group: "{{item.group}}"
+       password: "{{'123456'|password_hash('sha512')}}"
+      with_items:
+       - {name: "nb", group: "users"}
+       - {name: "dd", group: "mail"}
+       - {name: "jj", group: "wheel"}
+       - {name: "lx", group: "root"}
+     

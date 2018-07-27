@@ -1,0 +1,8 @@
+---
+- hosts: web
+  remote_user: root
+  tasks:
+   - name: ooxx
+     user: name=plj group=wheel uid=2000
+   - shell: echo 123456 | passwd --stdin plj
+   - shell: chage -d 0 plj
