@@ -1,0 +1,16 @@
+重定向  <   >   >>  <<
+stdin	0	标准输入(读)
+stdout	1	标准输出(写)
+stderr	2	标准错误(写)
+
+exec 修改文件描述符号
+
+elasticsearch 单机安装
+1 修改 /etc/hosts
+2 安装 yum install -y java-1.8.0-openjdk
+3 安装 yum install -y elasticsearch
+修改配置文件 /etc/elasticsearch/elasticsearch.yml
+network.host: 0.0.0.0
+启动服务 systemctl start elasticsearch
+
+浏览器访问验证 http://192.168.1.11:9200/
