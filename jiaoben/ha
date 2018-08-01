@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in $@
+do
+ rsync -aSH --delete /usr/local/hadoop/ $i:/usr/local/hadoop -e 'ssh' & 
+done
+wait
