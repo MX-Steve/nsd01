@@ -13,6 +13,8 @@
 ALL 表示所有主机，
 NODE 表示 node1,node2,node3
 NN1: 表示 namenode
+配置文件文档：官方网站 http://hadoop.apache.org/ ==>左侧菜单 documentation ==>release 2.7.6 ==> 做下角四大配置文件
+
 #-----------------------------------------------------#
 
 3. 完全分布式集群搭建 -- HDFS
@@ -23,20 +25,26 @@ NN1: 表示 namenode
 
 	1. ALL: 配置 /etc/hosts
 	2. ALL: 安装 java-1.8.0-openjdk-devel
-
+		nn01无密登录到node{1..3}
 	3. core-site.xml 配置
 		<configuration>
 		    <property>
 			<name>fs.defaultFS</name>
 			<value>hdfs://nn01:9000</value>
 		    </property>
-			==>
+			==>默认hadoop文件系统的位置,整个集群使用什么文件系统:
+				client去访问集群文件系统,namenode
 		    <property>
 			<name>hadoop.tmp.dir</name>
 			<value>/var/hadoop</value>
 		    </property>
-			==>自定义集群数据存放位置
+			==>自定义集群数据存放位置:
+				hadoop最终数据存储在磁盘上，每台数据存在 /var/hadoop/ 中，可以将更大的空磁盘mount到该文件夹下
 		</configuration>
+	  slaves 配置==>指定datanode
+		node1
+		node2
+		node3
 
 ALL: 创建 /var/hadoop
 
@@ -46,22 +54,25 @@ hdfs-site.xml 配置
         <name>dfs.namenode.http-address</name>
         <value>nn01:50070</value>
     </property>
+	==>让自己知道namenode是谁？存完数据后通知namenode存在哪儿了
     <property>
         <name>dfs.namenode.secondary.http-address</name>
         <value>nn01:50090</value>
     </property>
+	==>谁是secondary
     <property>
         <name>dfs.replication</name>
         <value>2</value>
     </property>
+	==>数据存几份
 </configuration>
 
 ALL: 同步配置到所有主机
 
-NN01: 格式化 namenode
+NN01: 格式化 namenode:格式化hdfs文件系统
 ./bin/hdfs namenode -format
 
-NN01: 启动集群
+NN01: 启动集群:启动hdfs分布式文件系统
 ./sbin/start-dfs.sh
 停止集群可以使用 ./sbin/stop-dfs.sh
 
