@@ -1,0 +1,278 @@
+1 hadoop 单机配置
+	vim /etc/hosts
+		192.168.1.10 nn01
+	vim /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+		export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-11.b12.el7.x86_64/jre"
+		export HADOOP_CONF_DIR="/usr/local/hadoop/etc/hadoop"
+
+2. 分析单词出现的次数
+	./bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.6.jar wordcount oo xx
+		==>从oo中获取数据，将分析结果存入xx中==>[xx目录不能存在]
+
+#-----------------------------------------------------#
+ALL 表示所有主机，
+NODE 表示 node1,node2,node3
+NN1: 表示 namenode
+#-----------------------------------------------------#
+
+3. 完全分布式集群搭建 -- HDFS
+	192.168.1.10	nn01	namenode,secondarynamenode
+	192.168.1.11	node1	datanode
+	192.168.1.12	node2	datanode
+	192.168.1.13	node3	datanode
+
+	1. ALL: 配置 /etc/hosts
+	2. ALL: 安装 java-1.8.0-openjdk-devel
+
+	3. core-site.xml 配置
+		<configuration>
+		    <property>
+			<name>fs.defaultFS</name>
+			<value>hdfs://nn01:9000</value>
+		    </property>
+			==>
+		    <property>
+			<name>hadoop.tmp.dir</name>
+			<value>/var/hadoop</value>
+		    </property>
+			==>自定义集群数据存放位置
+		</configuration>
+
+ALL: 创建 /var/hadoop
+
+hdfs-site.xml 配置
+<configuration>
+    <property>
+        <name>dfs.namenode.http-address</name>
+        <value>nn01:50070</value>
+    </property>
+    <property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>nn01:50090</value>
+    </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+</configuration>
+
+ALL: 同步配置到所有主机
+
+NN01: 格式化 namenode
+./bin/hdfs namenode -format
+
+NN01: 启动集群
+./sbin/start-dfs.sh
+停止集群可以使用 ./sbin/stop-dfs.sh
+
+ALL: 验证角色 jps
+
+NN01: 验证集群是否组建成功
+./bin/hdfs dfsadmin -report
+
+服务启动日志路径 /usr/local/hadoop/logs
+
+mapred-site.xml 配置
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+
+yarn-site.xml 配置
+<configuration>
+
+<!-- Site specific YARN configuration properties -->
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>nn01</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+</configuration>
+
+ALL: 同步配置到主机
+NN1: 启动服务 ./sbin/start-yarn.sh
+ALL: 验证角色 jps 
+NN1: 验证节点状态 ./bin/yarn node -list
+
+增加修复节点
+按照单机方法安装一台机器，部署运行的 java 环境
+拷贝 namenode 的文件到本机
+启动 datanode
+./sbin/hadoop-daemons.sh start datanode
+设置同步带宽
+./bin/hdfs dfsadmin -setBalancerBandwidth 60000000
+./sbin/start-balancer.sh
+
+删除节点
+<property>
+    <name>dfs.hosts.exclude</name>
+    <value>/usr/local/hadoop/etc/hadoop/exclude</value>
+</property>
+
+开始导出数据
+./bin/hdfs dfsadmin -refreshNodes
+
+查看状态
+Normal   正常状态
+Decommissioned  in  Program  数据正在迁移
+Decommissioned   数据迁移完成
+
+yarn 增加 nodemanager
+./sbin/yarn-daemon.sh start nodemanager
+yarn 停止 nodemanager
+./sbin/yarn-daemon.sh stop  nodemanager
+yarn 查看节点状态
+./bin/yarn node -list
+===============================
+NFS 网关 NFSGW: 192.168.1.15
+	==>资源管理器(ResourceManager:192.168.1.10)和客户端(192.168.1.15)之间的中介人
+1 配置 /etc/hosts (NFSGW)
+	192.168.1.10	nn01
+	192.168.1.11	node1
+	192.168.1.12	node2
+	192.168.1.13	node3
+	192.168.1.15	nfsgw  
+		==>写上所有节点的信息
+
+2 添加用户(nfsgw, nn01) 
+	==>代理用户 :代理管理机器nn01执行命令[管理节点上和它本身都要有该用户uid和gid相同]
+	groupadd -g 200 nsd1803
+	useradd -u 200 -g 200 nsd1803
+
+3 停止集群(nn01)
+	./sbin/stop-all.sh  ==>停止 dfs 和 yarn 两个服务
+
+4 增加配置 core-site.xml(nn01)
+    <property>
+        <name>hadoop.proxyuser.nsd1803.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.nsd1803.hosts</name>
+        <value>*</value>
+    </property>
+     管理节点的用户名和所有组，*：表示任何人都可以登录
+5 同步配置到所有节点 (nn01)
+	ha node{1..3}
+6 启动集群  (nn01)
+  	./sbin/start-dfs.sh
+7 查看状态 (nn01)
+	./bin/hdfs dfsadmin -report
+8 NFSGW: 安装 java-1.8.0-openjdk-devel
+	yum -y install java-1.8.0-openjdk-devel
+9 NFSGW: 同步 nn01 的 /usr/local/hadoop 到NFSGW的相同目录下
+	rsync -SH  nn01:/usr/local/hadoop/ /usr/local/hadoop
+10 NFSGW: hdfs-site.xml 增加配置
+    <property>
+        <name>nfs.exports.allowed.hosts</name>
+        <value>* rw</value>
+    </property>
+	指定可以被挂载的用户，以及挂载后可以拥有的权限
+    <property>
+        <name>nfs.dump.dir</name>
+        <value>/var/nfstmp</value>
+    </property>
+	用户需要更新文件转储目录参数 ==>作为存储文件的临时存放位置
+
+11 NFSGW: 创建转储目录，并给用户 nsd1803 赋权
+	mkdir /var/nfstmp
+	chown nsd1803:nsd1803 /var/nfstmp
+
+12 NFSGW: 给 /usr/local/hadoop/logs 赋权
+	setfacl -m u:nsd1803:rwx
+
+13 创建数据根目录 /var/hadoop
+	mkdir /var/hadoop
+
+====================================
+客户端挂载使用nfs：
+	安装nfs-utils
+		yum -y install nfs-utils
+	挂载 nfs ==> 即挂载nfsgw(192.168.1.16)这台设备上提供的nfs服务
+		mount -t nfs -o vers=3,proto=tcp,noatime,nolock,sync 192.168.1.16:/ /mnt
+		sync:因为它可以最小化,戒避免重新排序写入,这将导致更可预测的吞吏量。未挃定同步选项可能会导致上传大文件时出现丌可靠的行为
+	查看使用
+		df -h ==>查看挂载的目录==>该目录内容为hadoop集群存储的内容
+		ls /mnt/
+		touch /mnt/a.txt
+			==>能成功代表配置争取
+	开机自动挂载
+		vim /etc/fstab
+			192.168.1.16:/  /mnt nfs vers=3,proto=tcp,noatime,nolock,sync  0 0
+		mount -a
+		
+==========================
+验证集群是否正确
+http://192.168.1.10:50070
+http://192.168.1.10:50090
+http://192.168.1.10:8088
+http://192.168.1.11:50075
+http://192.168.1.11:8042
+		
+
+zookeeper 安装
+1 配置 /etc/hosts ,所有集群主机可以相互 ping 通
+2 安装 java-1.8.0-openjdk-devel
+3 zookeeper 解压拷贝到 /usr/local/zookeeper
+4 配置文件改名，并在最后添加配置
+mv zoo_sample.cfg  zoo.cfg
+zoo.cfg 最后添加配置
+server.1=node1:2888:3888
+server.2=node2:2888:3888
+server.3=node3:2888:3888
+server.4=nn01:2888:3888:observer
+5 拷贝 /usr/local/zookeeper 到其他集群主机
+6 创建 mkdir /tmp/zookeeper
+ALL: 7 创建 myid 文件，id 必须与配置文件里主机名对应的 server.(id) 一致 echo 1 >
+/tmp/zookeeper/myid
+8 启动服务，单启动一台无法查看状态，需要启动全部集群以后才能查看状态
+/usr/local/zookeeper/bin/zkServer.sh start
+9 查看状态
+/usr/local/zookeeper/bin/zkServer.sh status
+
+利用 api 查看状态的脚本
+#!/bin/bash
+function getstatus(){
+    exec 9<>/dev/tcp/$1/2181 2>/dev/null
+    echo stat >&9
+    MODE=$(cat <&9 |grep -Po "(?<=Mode:).*")
+    exec 9<&-
+    echo ${MODE:-NULL}
+}
+for i in node{1..3} nn01;do
+    echo -ne "${i}\t"
+    getstatus ${i}
+done
+
+kafka 搭建
+1 下载解压 kafka 压缩包
+2 把 kafka 拷贝到 /usr/local/kafka 下面
+3 修改配置文件 /usr/local/kafka/config/server.properties
+broker.id=11
+zookeeper.connect=node1:2181,node2:2181,node3:2181
+4 拷贝 kafka 到其他主机，并修改 broker.id ,不能重复
+5 启动 kafka 集群 [每一台]
+/usr/local/kafka/bin/kafka-server-start.sh -daemon
+/usr/local/kafka/config/server.properties
+
+验证集群
+创建一个 topic 
+./bin/kafka-topics.sh --create --partitions 1 --replication-factor 1 --zookeeper node3:2181 --topic nsd1803
+生产者
+./bin/kafka-console-producer.sh --broker-list node2:9092 --topic nsd1803
+消费者
+./bin/kafka-console-consumer.sh --bootstrap-server node1:9092 --topic nsd1803
+
+
+
+
+
+
+
+
+
