@@ -1,0 +1,20 @@
+print("%-10s%-5s" % ("tom",12))
+print("%-10s%-5s" % ("tom123",12))
+print("%-10s%-5s" % ("chokm",12))
+print("%-10s%s" % ("chokm",25))
+print("%-10s%-5d" % ("chokm",12))
+print("%-10s%-5i" % ("chokm",19))
+print("%-10s0o%-5o" % ("chokm",19))
+print("%c" % 98)
+print("%#o" % 30)
+print("%#x" % 30)
+print("%e" % 10000000)
+print("%f" % (5/3))
+print("%.2f" % (5/3))
+print("%10d" % 44)
+print("% d" % 44)
+
+###########################################
+print("{} is {} years old".format("lisi",23))
+import subprocess
+# subprocess.call('ls /root', shell=True)

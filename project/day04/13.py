@@ -1,0 +1,2 @@
+import  go
+go.b()
