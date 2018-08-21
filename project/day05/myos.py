@@ -1,0 +1,25 @@
+import os
+print(os.getcwd())
+print(os.listdir())
+print(os.listdir("/tmp"))
+# os.mkdir("/tmp/mydemo1")
+os.chdir("/tmp/mydemo1")
+print(os.getcwd())
+# os.mknod('mytest')
+# os.symlink('/etc/hosts','zhuji') #创建软链接
+# os.makedirs('aaa/bbb/cccc') #-p
+# os.listdir('aaa')
+print(os.path.isdir('aaa'))
+print(os.path.isfile('zhuji'))
+print(os.path.exists('zhuji'))
+print(os.path.abspath('zhuji'))
+print(os.path.basename('zhuji'))
+print(os.path.dirname('/tmp/mydemo1/aa.txt'))
+print(os.path.split('/tmp/myde.mo1/aa.txt.py'))
+print(os.path.splitext('/tmp/myde1/aa.txt.py'))
+print(os.path.join('/tmp/','abc'))
+print(os.path.getatime('/tmp/'))
+print(os.listdir())
+# os.remove("aa.txt")
+# os.rmdir("/tmp") #删除空目录
+os.chmod("/tmp/user.txt",0o777)

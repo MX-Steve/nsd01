@@ -1,0 +1,21 @@
+# f1 = open('/tmp/passwd')
+# f2 = open('/tmp/mima')
+# s1 = set(f1)
+# s2 = set(f2)
+# f3 = open('/tmp/result','w')
+# f3.writelines(s2 - s1)
+#
+# f1.close()
+# f2.close()
+# f3.close()
+
+# 客户端访问服务器，服务器记录结果，查看新产生的值
+f1=open('/tmp/passwd')
+f2=open("/tmp/mima")
+f3=open("/tmp/r1.txt",'w')
+s1 = set(f1)
+s2 = set(f2)
+f3.writelines(s2-s1)
+f1.close()
+f2.close()
+f3.close()
