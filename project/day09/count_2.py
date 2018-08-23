@@ -1,0 +1,20 @@
+from collections import Counter
+
+c=Counter()
+c.update(['1.1.2.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.3.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.2.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.2.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.1.1'])
+c.update(['1.1.3.1'])
+c.update(['1.1.4.1'])
+print(c)
+print(c.most_common(2))
+
