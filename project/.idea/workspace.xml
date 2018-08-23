@@ -78,6 +78,7 @@
     <SUITE FILE_PATH="coverage/project$time_2.coverage" NAME="time_2 Coverage Results" MODIFIED="1534901759537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day07" />
     <SUITE FILE_PATH="coverage/project$mypickle.coverage" NAME="mypickle Coverage Results" MODIFIED="1534756632924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day05" />
     <SUITE FILE_PATH="coverage/project$anon.coverage" NAME="anon Coverage Results" MODIFIED="1534837164716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day06" />
+    <SUITE FILE_PATH="coverage/project$udp_server_1.coverage" NAME="udp_server_1 Coverage Results" MODIFIED="1535014412232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day09" />
     <SUITE FILE_PATH="coverage/project$re_1.coverage" NAME="re_1 Coverage Results" MODIFIED="1534991833666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day09" />
     <SUITE FILE_PATH="coverage/project$00_1.coverage" NAME="00-1 Coverage Results" MODIFIED="1534382395002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day02" />
     <SUITE FILE_PATH="coverage/project$load_module.coverage" NAME="load_module Coverage Results" MODIFIED="1534905440133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day07" />
@@ -87,27 +88,20 @@
     <SUITE FILE_PATH="coverage/project$qsort.coverage" NAME="qsort Coverage Results" MODIFIED="1534843448183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day06" />
     <SUITE FILE_PATH="coverage/project$login2.coverage" NAME="login2 Coverage Results" MODIFIED="1534313213074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/project$account_1.coverage" NAME="account_1 Coverage Results" MODIFIED="1534831693948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day06" />
+    <SUITE FILE_PATH="coverage/project$tcp_time_server.coverage" NAME="tcp_time_server Coverage Results" MODIFIED="1535017046275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day09" />
     <SUITE FILE_PATH="coverage/project$a.coverage" NAME="a Coverage Results" MODIFIED="1534239514008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/project$myos.coverage" NAME="myos Coverage Results" MODIFIED="1534755532020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day05" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="udp_server.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/day09/udp_server.py">
+      <file leaf-file-name="tcp_time_server.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/day09/tcp_time_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="udp_client.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/day09/udp_client.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-              <folding />
+            <state relative-caret-position="-6">
+              <caret line="14" column="19" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -207,11 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/day05/clock_1.py" />
-        <option value="$PROJECT_DIR$/day05/myset.py" />
-        <option value="$PROJECT_DIR$/day05/f1.py" />
-        <option value="$PROJECT_DIR$/day05/mytime.py" />
-        <option value="$PROJECT_DIR$/day05/mydiv.py" />
         <option value="$PROJECT_DIR$/day05/mydiv1.py" />
         <option value="$PROJECT_DIR$/day05/myos.py" />
         <option value="$PROJECT_DIR$/day05/mypickle.py" />
@@ -258,6 +247,11 @@
         <option value="$PROJECT_DIR$/day09/tcp_client_1.py" />
         <option value="$PROJECT_DIR$/day09/udp_server.py" />
         <option value="$PROJECT_DIR$/day09/udp_client.py" />
+        <option value="$PROJECT_DIR$/day09/udp_server_1.py" />
+        <option value="$PROJECT_DIR$/day09/udp_server_2.py" />
+        <option value="$PROJECT_DIR$/day09/udp_client_1.py" />
+        <option value="$PROJECT_DIR$/day09/udp_client_2.py" />
+        <option value="$PROJECT_DIR$/day09/tcp_time_server.py" />
       </list>
     </option>
   </component>
@@ -268,8 +262,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="757" />
-    <option name="y" value="67" />
+    <option name="x" value="317" />
+    <option name="y" value="83" />
     <option name="width" value="1893" />
     <option name="height" value="695" />
   </component>
@@ -333,26 +327,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.udp_client">
-    <configuration name="tcp_server" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/day09" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="project" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/day09/tcp_server.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.tcp_time_server">
     <configuration name="tcp_server_1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -372,7 +347,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="tcp_server_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="tcp_time_server" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -385,7 +360,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="project" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/day09/tcp_server_2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/day09/tcp_time_server.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -429,20 +404,39 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="udp_server_1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/day09" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="project" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/day09/udp_server_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.tcp_server" />
-      <item index="1" class="java.lang.String" itemvalue="Python.tcp_server_1" />
-      <item index="2" class="java.lang.String" itemvalue="Python.tcp_server_2" />
-      <item index="3" class="java.lang.String" itemvalue="Python.udp_server" />
-      <item index="4" class="java.lang.String" itemvalue="Python.udp_client" />
+      <item index="0" class="java.lang.String" itemvalue="Python.tcp_server_1" />
+      <item index="1" class="java.lang.String" itemvalue="Python.udp_server" />
+      <item index="2" class="java.lang.String" itemvalue="Python.udp_client" />
+      <item index="3" class="java.lang.String" itemvalue="Python.udp_server_1" />
+      <item index="4" class="java.lang.String" itemvalue="Python.tcp_time_server" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.udp_client" />
-        <item index="1" class="java.lang.String" itemvalue="Python.udp_server" />
-        <item index="2" class="java.lang.String" itemvalue="Python.tcp_server_1" />
-        <item index="3" class="java.lang.String" itemvalue="Python.tcp_server_2" />
-        <item index="4" class="java.lang.String" itemvalue="Python.tcp_server" />
+        <item index="0" class="java.lang.String" itemvalue="Python.tcp_time_server" />
+        <item index="1" class="java.lang.String" itemvalue="Python.udp_server_1" />
+        <item index="2" class="java.lang.String" itemvalue="Python.udp_client" />
+        <item index="3" class="java.lang.String" itemvalue="Python.udp_server" />
+        <item index="4" class="java.lang.String" itemvalue="Python.tcp_server_1" />
       </list>
     </recent_temporary>
   </component>
@@ -463,7 +457,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="757" y="67" width="1893" height="695" extended-state="0" />
+    <frame x="317" y="83" width="1893" height="695" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -501,41 +495,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/day05/mydiv1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/day05/zhangdan.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/day05/myos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/day05/qianbao.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/day05/mypickle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/day05/clock_1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -833,31 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python3.6/socket.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="46" column="3" lean-forward="true" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
-          <folding>
-            <element signature="e#1943#1957#0" expanded="true" />
-            <element signature="e#5098#5109#0" expanded="false" />
-            <element signature="e#5150#5195#0" expanded="false" />
-            <element signature="e#5229#6099#0" expanded="false" />
-            <element signature="e#6215#6564#0" expanded="false" />
-            <element signature="e#6596#7567#0" expanded="false" />
-            <element signature="e#7689#9081#0" expanded="false" />
-            <element signature="e#9124#12037#0" expanded="false" />
-            <element signature="e#12056#12218#0" expanded="false" />
-            <element signature="e#12290#13558#0" expanded="false" />
-            <element signature="e#13627#14182#0" expanded="false" />
-            <element signature="e#14244#15292#0" expanded="false" />
-            <element signature="e#15335#15437#0" expanded="false" />
-            <element signature="e#15494#15586#0" expanded="false" />
-            <element signature="e#15617#15775#0" expanded="false" />
-            <element signature="e#15807#16141#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/day09/tcp_client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -882,14 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1437855905/_socket.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="821" column="41" lean-forward="true" selection-start-line="821" selection-start-column="41" selection-end-line="821" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/day09/tcp_server_2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -906,19 +832,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/day09/udp_server_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/day09/udp_server_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/day09/udp_server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        <state relative-caret-position="90">
+          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/day09/udp_client_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/day09/udp_client_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/1437855905/_socket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-53">
+          <caret line="991" column="8" lean-forward="false" selection-start-line="991" selection-start-column="8" selection-end-line="991" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/day09/udp_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        <state relative-caret-position="162">
+          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/socket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="49" column="10" lean-forward="true" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+          <folding>
+            <element signature="e#5098#5109#0" expanded="false" />
+            <element signature="e#5150#5195#0" expanded="false" />
+            <element signature="e#5229#6099#0" expanded="false" />
+            <element signature="e#6215#6564#0" expanded="false" />
+            <element signature="e#6596#7567#0" expanded="false" />
+            <element signature="e#7689#9081#0" expanded="false" />
+            <element signature="e#9124#12037#0" expanded="false" />
+            <element signature="e#12056#12218#0" expanded="false" />
+            <element signature="e#12290#13558#0" expanded="false" />
+            <element signature="e#13627#14182#0" expanded="false" />
+            <element signature="e#14244#15292#0" expanded="false" />
+            <element signature="e#15335#15437#0" expanded="false" />
+            <element signature="e#15494#15586#0" expanded="false" />
+            <element signature="e#15617#15775#0" expanded="false" />
+            <element signature="e#15807#16141#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/day09/tcp_time_server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="14" column="19" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
