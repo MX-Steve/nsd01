@@ -1,0 +1,124 @@
+思路：服务 DHCP TFTP Web system-config-kickstart
+DHCP ： 自动分配ip地址  指定下一个服务ip地址 pxelinux.0 （网卡引导文件名）
+TFTP： /var/lib/tftpboot/ 
+      1）pxelinux.0 放入 /var/lib/tftpboot/ 
+        2）部署菜单文件（来源：iso镜像挂载） 存入目录pxelinux.cfg（新建） 改名为default（可读写，需要修改）
+        3）存入
+             部署启动内核    启动驱动程序     图形的模块          背景图片
+           vmlinuz   initrd.img  vesamenu.c32     splash.png
+web：发布所要安装的系统
+
+system-config-kickstart：无人值守 自动应答文件
+
+
+
+虚拟机A：
+一、dhcp配置，指定next-server下一个服务器
+1.安装软件包
+[root@svr7 /]# yum -y install dhcp
+2.修改主配置文件
+[root@svr7 /]# vim  /etc/dhcp/dhcpd.conf
+末行模式  :r /usr/share/doc/dhcp*/dhcpd.conf.example
+
+subnet  192.168.4.0  netmask 255.255.255.0 {
+  range  192.168.4.100   192.168.4.200;
+  option domain-name-servers 192.168.4.7;
+  option routers 192.168.4.254;
+  default-lease-time 600;
+  max-lease-time 7200;
+  next-server 192.168.4.7;
+  filename   "pxelinux.0";      #指定网卡引导文件名
+}
+[root@svr7 /]# systemctl restart dhcpd
+pxelinux.0：安装说明书,二进制文件，安装一个软件自动生成
+ pxelinux.0-----》读取菜单文件
+          /var/lib/tftpboot/pxelinux.cfg/default
+二、搭建tftp服务，传输引导文件
+  tftp:简单的文件传输协议  端口：69
+    默认共享路径：/var/lib/tftpboot
+1.安装软件包tftp-server
+2.重起tftp服务
+[root@svr7 /]# systemctl restart tftp
+[root@svr7 /]# systemctl enable tftp
+3.部署pxelinux.0文件
+ #查询仓库中软件生成pxelinux.0
+#  yum  provides  */pxelinux.0  
+#  yum -y install syslinux
+#  rpm -ql syslinux      #查看软件包安装清单
+#  rpm -ql syslinux | grep pxelinux.0 
+# cp /usr/share/syslinux/pxelinux.0  /var/lib/tftpboot/
+# ls /var/lib/tftpboot/
+4. 部署菜单文件
+# mkdir  /var/lib/tftpboot/pxelinux.cfg
+# ls  /var/lib/tftpboot/
+# mount  /dev/cdrom   /mnt/
+# ls  /mnt/isolinux/
+# cp /mnt/isolinux/isolinux.cfg /var/lib/tftpboot/pxelinux.cfg/default
+# ls -l  /var/lib/tftpboot/pxelinux.cfg/default
+# chmod 644 /var/lib/tftpboot/pxelinux.cfg/default
+# ls -l  /var/lib/tftpboot/pxelinux.cfg/default
+5. 部署启动内核  启动驱动程序  
+   vmlinuz 启动内核 
+   initrd.img  启动驱动程序  
+# cp /mnt/isolinux/vmlinuz /mnt/isolinux/initrd.img   /var/lib/tftpboot/
+
+# ls /var/lib/tftpboot/
+6. 部署  图形的模块    背景图片
+   vesamenu.c32 图形的模块   
+   splash.png  背景图片
+[root@svr7 /]# cp /mnt/isolinux/vesamenu.c32 /mnt/isolinux/splash.png /var/lib/tftpboot/
+[root@svr7 /]# ls /var/lib/tftpboot/
+ initrd.img  pxelinux.cfg  vesamenu.c32
+ pxelinux.0  splash.png    vmlinuz
+7.修改菜单文件内容
+ # vim  /var/lib/tftpboot/pxelinux.cfg/default
+  default vesamenu.c32  #加载图形的模块
+  timeout 60            #读秒的时间
+    .......
+  menu background splash.png      #指定背景图片
+  menu title PXE Server NSD1803   #指定标题
+    .......
+ label linux
+   menu label Install RHEL7   #显示选项内容
+   kernel vmlinuz             #指定启动内核
+   append initrd=initrd.img   #指定启动驱动程序
+总结：
+     dhcp----》IP、next-server、pxelinux.0
+     tftp----》pxelinux.0
+     pxelinux.0----》default
+     default----》vesamenu.c32 、vmlinuz、initrd.img 
+三、搭建Web服务，共享光盘所有内容
+1.安装软件包
+[root@svr7 /]# yum -y install httpd
+2.创建目录
+[root@svr7 /]# mkdir /var/www/html/rhel7
+[root@svr7 /]# ls /var/www/html/rhel7
+[root@svr7 /]# mount /dev/cdrom  /var/www/html/rhel7
+[root@svr7 /]# ls /var/www/html/rhel7
+[root@svr7 /]# systemctl restart httpd
+[root@svr7 /]# systemctl enable httpd
+3.测试
+[root@svr7 /]# firefox 192.168.4.7/rhel7
+四、部署应答文件，无人值守安装
+1.图形生成应答文件的工具  system-config-kickstart
+   # yum  -y install system-config-kickstart
+2.修改Yum仓库标识
+[root@svr7 /]# vim /etc/yum.repos.d/rhel7.repo 
+   [development]
+[root@svr7 /]# system-config-kickstart
+      查看软件包是否可以选择
+3.查看应答文件
+[root@svr7 /]# ls /root/ks.cfg 
+/root/ks.cfg
+4.利用Web服务，共享应答文件
+[root@svr7 /]# cp /root/ks.cfg  /var/www/html
+[root@svr7 /]# ls /var/www/html
+5.修改菜单文件指定应答文件
+ # vim /var/lib/tftpboot/pxelinux.cfg/default
+........
+label linux
+  menu label Install RHEL7
+  menu  default                 #读秒之后默认的选择
+  kernel vmlinuz
+  append initrd=initrd.img ks=http://192.168.4.7/ks.cfg
+
