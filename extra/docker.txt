@@ -1,0 +1,32 @@
+docker基础篇：
+1.docker简介
+	Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化,方便快捷。
+	
+2.docker和虚拟机的比较
+	特性		容器		虚拟机
+	启动		秒级		分钟
+	硬盘		MB		GB
+	性能		接近原生	弱
+	系统支持量	数千		几十个
+3.docker应用场景
+	1.面向开发
+	2.面向测试
+	3.面向运维
+	4.面向自动化
+	5.面向微服务
+	6.大规模分布式架构[微信红包
+
+4.环境准备
+	1、yum安装 yum install   docker-io
+  	2、curl脚本安装 
+
+5.docker数据管理
+	1.数据卷
+		[root@steve ~]# docker run -it --name volume-test1 -h mycentos -v /opt centos
+		[root@steve ~]# docker run -it --name volume-test2 -h centos -v /opt:/opt centos
+			:前面为物理机，后面为docker容器
+		[root@steve ~]# docker run -it --name volume-test2 -h centos -v /opt:/opt:ro centos==>只读
+
+	2.数据卷容器
+		[root@steve ~]# docker run -it --name volume-test3 --volumes-from volume-test2 centos
+		volume-test2为之前存在的容器，不用启动，用他来做其他容器的存储
