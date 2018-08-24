@@ -1,4 +1,7 @@
-mysql鲜为人知的秘密 : GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION
+mysql鲜为人知的秘密 : 
+0.知识点：
+	GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION
+	mysql主从同步监控
 1.环境准备
 	主：192.168.1.1
 	从：192.168.1.2
@@ -59,6 +62,21 @@ mysql> show slave status\G;
 	==>两个yes即表示同步成功
 
 9.从库编写监控脚本，监控io或者sql线程是否正常，不正常时，则报错
+[root@yaya1 ~]# vim watch_mysql.sh
+	#!/bin/bash
+	io=`mysql -uroot -p123qqq...A -e "show slave status\G" 2>/dev/null | grep "Running:" |head -1 | awk '{print $2}'`
+	sql=`mysql -uroot -p123qqq...A -e "show slave status\G" 2>/dev/null | grep "Running:" |tail -1 | awk '{print $2}'`
+	if [ $io == 'Yes' ];then
+		echo "io is ok"
+	else
+		echo "io is not ok" | mail -s "Error ON SLAVE1" root
+	fi
+	if [ $sql == 'Yes' ];then
+		echo "sql is ok"
+	else
+		echo "sql is not ok" | mail -s "Error ON SLAVE1" root
+	fi
+[此处脚本也可以给zabbix监控使用]
 
 
 
