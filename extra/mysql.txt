@@ -1,0 +1,32 @@
+mysql鲜为人知的秘密 : GRANT PROXY ON ''@'' TO 'root'@'localhost' WITH GRANT OPTION
+1.环境准备
+	主：192.168.1.1
+	从：192.168.1.2
+	安装mysql
+2.root用户本地登录
+  mysql -uroot -q'123qqq...A'
+  vim /etc/my.cnf
+	[mysqld]
+	check_proxy_users=on
+	mysql_native_password_proxy_users=on
+	[修改参数，启动root用户proxy权限]
+
+3.创建用户： [此时用户没有任何权限]
+mysql> create user mysqladmin identified by "123qqq...A";
+mysql> select user,host from mysql.user;
+
+mysql> show grants for mysqladmin@'%';
+
+4.管理员授予权限
+mysql> grant all on gamedb.* to mysqladmin@"%";
+
+5.创建will和tom用户，将mysqladmin用户的权限映射给will和tom
+mysql> create user will identified by "123qqq...A";
+mysql> create user tom  identified by "123qqq...A";
+mysql> grant proxy on mysqladmin to will;
+mysql> grant proxy on mysqladmin to tom;
+	[此时will/tom和mysqladmin权限相同]
+  客户端使用这两个用户测试，登录后发现和mysqladmin权限相同
+
+
+
