@@ -1,6 +1,7 @@
 #http://down.51cto.com  ==><正则表达式必知必会>
 import re
 
+
 # 正则表达式贪婪匹配
 data = 'my phone number : 1501234565'
 m = re.search('.+(\d+)', data)
