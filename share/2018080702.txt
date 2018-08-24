@@ -1,0 +1,420 @@
+/bin中 - 用户二进制文件
+包含二进制可执行文件。
+在单用户模式下，你需要使用的常见Linux命令都位于此目录下。系统的所有用户使用的命令都设在这里。
+例如：ps、ls、ping、grep、cp
+
+/sbin目录 - 系统二进制文件
+就像/bin，/sbin同样也包含二进制可执行文件。
+但是，在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。例如：iptables、reboot、fdisk、ifconfig、swapon命令
+https://blog.csdn.net/weixin_42606128/article/details/80924211
+https://www.linuxidc.com/Linux/2016-08/134701.htm
+1. man
+
+      格式化以及列出命令的（在线）操作手册。
+      使用方法
+      man [ -options ] name
+      man man
+      man ls
+      man cd
+ 
+2. ls
+    列出目录下的内容
+    ls [option]… [file]…
+    ls    #列出当前文件夹下的所有文档
+    ls -l  等同于ll   #列出当前文件夹下的所有文档的详细资料
+    ls -al  #列出当前文件夹下的所有文档的详细资料（包括隐藏文件和父目录）
+    ls -lt    #列出当前文件夹下的所有ls文档的详细资料，修改时间倒序
+    ls -lrt    #列出当前文件夹下的所有文档的详细资料，修改时间正序
+    ls /home/qq    #列出某个目录下的所有文档
+ 
+3.pwd
+
+    显示当前或者工作路径。
+ 
+4. cd
+    改变当前所在路径
+    cd [dir] 
+    cd    当前用户主目录
+    cd /home/qq     绝对路径
+    cd .    本路径
+    cd ..    上一级目录
+    cd ~   进入到自己的家目录
+    cd /    根目录
+    cd -    返回进入此目录之前所在的目录
+ 
+4.1.Tab键
+自动补全
+vi
+5. mkdir
+    创建目录
+    mkdir testpwd
+    mkdir /home/qq/test2
+    mkdir -p /home/qq/test2/test21/test211    #若目录不存在，则创建
+ 
+6. cp
+    拷贝
+    文件到文件
+        cp file1 file2 拷贝并重命名
+        cp /path1/file1 /path2/file2 拷贝并重命名
+    ?文件到目录
+        cp file1 ../test1/ 拷贝
+        cp /home/qq/test1/file1 ./ 拷贝
+    ?目录到目录
+        cp -r test1 test2    #递归拷贝
+ 
+6.1 *
+    通配符，匹配一个或一个以上任意字符
+    ls *.txt
+    ls a*.txt
+    cp *.txt /path/to/des/
+    自行了解 “?”和”[]”
+ 
+7.which
+    显示某个命令的完整路径
+    which指令会在环境变量$PATH设置的目录里查找符合条件的文件。
+    which ls
+    which cp
+    另外一个作用：查看某个命令是否安装，或者是否在自己定义的环境变量中。
+ 
+8.whereis
+    列出某个命令的位置、帮助手册
+     whereis指令会在特定目录中查找符合条件的文件。
+    whereis ls
+    whereis cd
+    另外一个作用，在which没有查询到的时候，该命令未必不存在，需要再次使用whereis确定。比如bash内建命令
+ 
+9.clear
+       清屏（其实只是往上翻了）
+ 
+10.touch
+    更改文件的时间属性
+    另外一个作用，创建一个空文件
+        touch a.txt
+ 
+11.rm
+    删除文件或者目录
+    rm file1
+    rm -f file1    #不提示删除
+    rm -rf dir    #不提示删除某个文件夹，一定先执行pwd确定自己的位置，慎用
+ 
+12.vi
+    编辑器，查看或者编辑一个文本
+    vi a.txt
+        i    insert,进入编辑状态
+        esc    退出编辑状态
+        :wq!    保存退出
+        :q!        退出不保存i
+    非编辑状态下q
+        dd    删除
+        yy    拷贝
+        p      粘贴
+        /uu    查找包含uu的行
+               n    查找下一行
+                shift+n    查找上一行
+       ctrl+f      （forward）下一页
+        ctrl+b    （back）上一页
+ 
+13.cat
+    显示文件内容
+    cat file
+    cat -n file    #显示行号
+    避免对大文件使用cat 
+ 
+14.tac
+    倒序显示文件，相当于cat反过来
+    用于对日志文件的检查等
+    用得少
+ 
+15.more
+    简易的文件查看器
+    让画面在显示满一页时暂停，此时可按空格健继续显示下一个画面，或按Q键停止显示。
+    more file 或者使用管道，使用管道功能不全
+    cat a.txt |more
+    more a.txt
+        “空格”下一页
+        “回车”下一行
+         “b”    前一页
+       “/patten”查找
+15.1.  less
+    简易的文件查看器
+    less命令的用法与more命令类似，也可以用来浏览超过一页的文件。所不同的是less命令除了可以按空格键向下显示文件外，还可以利用上下键来卷动文件。当要结束浏览时，只要在less命令的提示符“: ”下按Q键即可。
+ 
+16.head
+    显示文件头部
+    head file 默认显示10行
+    head -5 file 显示前5行
+ 
+17.tail
+    显示文件尾部
+    tail file 默认显示最后10行
+    tail -5 file 显示后5行
+    tail -f file 实时显示文件尾部（很重要的命令）
+        
+ 
+18.echo
+    echo 123    #回显
+    echo aaa>>a.txt    #追加
+    echo aaa>a.txt       #覆盖
+ 
+19.wc
+    查看文件行数、单词个数、字节数：
+    
+    统计行数：
+    
+ 
+20.sort
+    文本排序命令
+    sort -n file  正序
+    sort -r file   倒序
+    sort -u file  剔重
+    sort -rn file     #ASCII码方式倒序
+    sort命令多和管道配合使用
+    如 ：du -k *|sort -rn    #文件大小倒序排（很重要），看哪个文件占的多
+ 
+21.grep
+    打印匹配的行，grep经常和管道配合使用
+    grep “正则表达式” file
+        （注意，用好grep的前提是熟悉linux下的正则）
+    grep 3 a.txt    #a.txt文件中包含3的行都打印出来
+    grep 3 a.txt |wc -l   #a.txt文件中包含3的行都有多少行
+    grep -n  3 a.txt    #包含3的行号和行给打出来
+        
+    grep -v 3 a.txt    #不包含3的行显示出来
+    grep 89$ a.txt    #结尾为89的行显示出来
+    grep ^98 a.txt    #开头为98的行显示出来
+    grep -n aa *    #当前目录下所有包含aa的行显示出来，打印出行号
+            
+ 
+22.find
+    在文件系统中查找文件
+    find命令很复杂，甚至可以称得上一门脚本语言，这里只介绍几种常用的命令。
+    find /path/to -name “test*” 按照命名规则查找
+    find /path/to -type f 按照文件类型查找
+    find /path/to -ctime -1 查找一天以内的文件和目录
+    find /path/to -cmin +1440 查找1440分钟以前的文件和目录
+    以上四种查找较为常见，可以组合使用。
+    另外，可以在查找后使用 -exec 执行后续操作
+        find /path/to -ctime +30 -exec rm -rf {} \; 删除30天前的文件。
+ 
+23.tar
+    打包，tar很强大，这里只介绍打包和解包
+    tar -zcvf file.tar.gz a.txt b.txt    压缩文件（把a.txt和b.txt压缩到file.tar.gz中）
+    tar -zxvf file.tar.gz    解压缩
+     tar -zxvf file.tar.gz -C test/    解压缩到指定目录
+    -z参数表示是否将文件gzip压缩
+ 
+24.kill
+       
+       kill 10170 #本身和子进程都杀了
+        kill -9 10170    #只杀进程本身
+ 
+25.gzip zcat
+        压缩
+        gzip file
+        zcat file.gz    #查看gzip文件
+        gunzip file.gz    #解压缩
+        多用于日志的压缩
+ 
+26.useradd
+    添加用户
+    useradd username
+ 
+27.passwd
+    修改密码命令
+    passwd [username]
+    passwd 为当前用户修改密码
+    passwd username 为其他用户修改密码（通常是root操作）
+ 
+28.su
+    以另外一个用户身份启动新的shell（切换用户）
+    su [option] [username]
+    su 切换到root，但是不使用root环境变量
+    su - 切换到root，使用root环境变量 
+    注意，一般推荐加上“-”
+ 
+29.whoami
+    查看当前使用的用户名称
+ 
+30.logname
+    查看登录时的用户
+ 
+31.who
+    查看当前所有登录用户
+ 
+32.last
+    查看用户登录历史  
+    注意，如果黑客攻击，一般会修改该文件
+ 
+33.chown
+    改变文件属组
+    冒号前面为所有者，冒号后面为群组
+    chown zhang:zhang file    #改变文件
+    chown -R zhang:group dir    #改变vi目录
+ 
+34.chmod
+    修改文件的读写属性
+    chmod 755 file
+    chmod -R 644 dir
+    0-无权限(-)；1-可执行（x）；2-可读(r)；4-可写（w）
+    第一列代表所属用户权限，第二列代表所属组权限，第三列代表其他用户权限
+ 
+35.df
+    显示磁盘空间使用情况
+    df -h    #到G自动显示G，到M自动显示M
+    df -m    #显示M
+    df         #等同于df -k
+    
+ 
+36.du
+    du -sh        #当前目录占用的空间
+    du -sh *    #当前目录下所有的文件占用的空间
+    du -sk * |sort -nr #显示前10个比较大的文件
+    
+ 
+37.free
+    查看内存使用情况
+    free    #K显示
+    free -m    #兆显示
+    free -g     #G显示
+    以下:一共28M，使用2M，剩余26M
+    
+    
+38.top
+    显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等
+    第一行，任务队列信息
+    系统时间、系统已运行时间、3个用户登录系统、load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况
+    第二行，Tasks — 任务（进程）
+    89个进程，其中运行中的有1个，88个休眠
+    第三行，cpu状态信息
+        us    #用户占用的CPU百分比
+        sy    #系统占用的CPU百分比
+        id    #空闲CPU百分比
+        wa  #CPU等待IO所用的时间，20%系统会很慢，30%可能没法操作了，长时间超过50%请检查硬盘设备，肯定出问题了
+    第四行,内存状态
+    物理内存总量、已使用内存总量、空闲内存总量、缓存
+    备注：
+    第四行中使用中的内存总量（used）指的是现在系统内核控制的内存数，空闲内存总量（free）是内核还未纳入其管控范围的数量。纳入内核管理的内存不见得都在使用中，还包括过去使用过的现在可以被重复利用的内存，内核并不把这些可被重新使用的内存交还到free中去，因此在linux上free内存会越来越少，但不用为此担心。
+
+    如果出于习惯去计算可用内存数，这里有个近似的计算公式：第四行的free + 第四行的buffers + 第五行的cached。
+
+    对于内存监控，在top里我们要时刻监控第五行swap交换分区的used，如果这个数值在不断的变化，说明内核在不断进行内存和swap的数据交换，这是真正的内存不够用了。
+
+   第七行以下：各进程（任务）的状态监控，项目列信息说明如下：
+
+ 
+
+    PID — 进程id
+
+    USER — 进程所有者
+
+    PR — 进程优先级
+
+    NI — nice值。负值表示高优先级，正值表示低优先级
+
+    VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+
+ 
+
+    RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+
+ 
+    SHR — 共享内存大小，单位kb
+
+ 
+    S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+
+ 
+    %CPU — 上次更新到现在的CPU时间占用百分比
+
+ 
+    %MEM — 进程使用的物理内存百分比
+
+ 
+    TIME+ — 进程使用的CPU时间总计，单位1/100秒
+
+ 
+ 
+
+    COMMAND — 进程名称（命令名/命令行）
+
+ 
+
+    
+    F 、f、 P、 p用来增加或减少显示项，以及显示顺序
+ 
+39.ps
+    显示当前运行进程 
+    ps -ef 
+    
+ 
+40.ifconfig
+    ifconfig    #查看机器IP，网卡等
+    这里只做显示网卡信息使用，建议不要使用ifconfig修改网卡参数  
+    
+41.netstat
+    查看网络信息
+    netstat -lnp 监听端口情况
+    netstat -anp 所有端口情况   
+ 
+42. uname
+    打印系统信息
+    uname -a
+ 
+43.date
+    查看修改系统时间
+    date
+    date -s 19:00:00
+ 
+44.reboot
+    重启
+ 
+45.shutdown
+    关机命令
+    shutdown -k now 通知所有终端，现在要关机，但是实际上不关机
+    shutdown -h now 通知多有终端，现在要关机，实际上确实关了
+    shutdown -k 5 通知所有终端，5分钟后要关机，但是实际上不关机
+    shutdown -h 5通知所有终端，5分钟后要关机，实际上确实要关机了
+
+46.env
+     env显示所有的环境变量
+     每个用户登录系统后，都会有一个专用的运行环境。
+     通常每个用户默认的环境都是相同的，这个默认环境实际上就是一组环境变量的定义。
+     用户可以对自己的运行环境进行定制，其方法就是修改相应的系统环境变量。
+     ◆ HISTSIZE是指保存历史命令记录的条数。
+     ◆ LOGNAME是指当前用户的登录名。
+     ◆ HOSTNAME是指主机的名称，许多应用程序如果要用到主机名的话，通常是从这个环境变量中来取得的。
+     ◆ SHELL是指当前用户用的是哪种Shell。
+     ◆ LANG/LANGUGE是和语言相关的环境变量，使用多种语言的用户可以修改此环境变量。
+     ◆ MAIL是指当前用户的邮件存放目录。
+     ◆ PS1是基本提示符，对于root用户是#，对于普通用户是$。PS2是附属提示符，默认是“>”。
+        # PS1=" Hello,My NewPrompt "
+        除了这些常见的环境变量，许多应用程序在安装时也会增加 一些环境变量.。
+        使用Java就要设置JAVA_HOME和CLASSPATH等，
+        安装五笔输入法会增加环境变量"XMODIFIERS=@im=fcitx"等。
+
+47.rmdir
+     rmdir    删除空目录
+
+48.file 
+     file  用于辨识文件类型
+
+49.cut
+     cut  -c ：显示行中指定范围的字符；
+     cut  -f  ：提取指定字段，默认的字段分隔符为”TAB“；
+            -b ：指定字段的分隔符    
+     
+50.uniq
+     uniq  报告或忽略文件中的重复行
+     -c：在每列旁边显示该行重复出现的次数；
+     -d：仅显示重复出现的行列；
+     -u：仅显示出一次的行列；
+
+51.tr
+     tr      字符串替换命令
+     tr  -d：删除所有属于第一字符集的字符；
+     tr  -s ：把连续重复的字符以单独一个字符表示；
+      cat 11.txt  | tr '\n' ' '                                              11 2211 2211 2211 2211
+      echo "TEST TEST" | tr 'A-Z' 'a-z'                           test test
+      echo "TEST 123 TEST 123" | tr -d '1 2 3'            TESTTEST
+      echo "TESTTT 123 TEESSTT" | tr -s 'TES'             TEST 123 TEST
+

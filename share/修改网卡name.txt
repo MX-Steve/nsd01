@@ -1,0 +1,13 @@
+案例：网卡名ens3，修改成eth0
+操作：
+	cd /etc/sysconfig/network-script/
+	mv ifcfg-ens3 ifcfg-eth0
+	vim ifcfg-eth0
+		name=eth0
+		device=eth0
+	vim /etc/default/grub [修改内核默认启动参数：禁用自动识别网卡名]
+		CMDLINELINUX 行添加：
+		net.ifnames=0 biosdevname=0
+	更新内核，重新生成grub配置
+	grub2-mkconfig -o /boot/grub2/grub.cfg
+	init 6
