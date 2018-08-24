@@ -93,32 +93,30 @@
     <SUITE FILE_PATH="coverage/project$qsort.coverage" NAME="qsort Coverage Results" MODIFIED="1534843448183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day06" />
     <SUITE FILE_PATH="coverage/project$login2.coverage" NAME="login2 Coverage Results" MODIFIED="1534313213074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/project$account_1.coverage" NAME="account_1 Coverage Results" MODIFIED="1534831693948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day06" />
-    <SUITE FILE_PATH="coverage/project$tcp_time_server.coverage" NAME="tcp_time_server Coverage Results" MODIFIED="1535017046275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day09" />
+    <SUITE FILE_PATH="coverage/project$tcp_time_server.coverage" NAME="tcp_time_server Coverage Results" MODIFIED="1535083466484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/devops/day10" />
     <SUITE FILE_PATH="coverage/project$a.coverage" NAME="a Coverage Results" MODIFIED="1534239514008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/project$myos.coverage" NAME="myos Coverage Results" MODIFIED="1534755532020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/day05" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="myforkping_1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/devops/day10/myforkping_1.py">
+      <file leaf-file-name="tcp_time_server_1.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/devops/day10/tcp_time_server_1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+            <state relative-caret-position="36">
+              <caret line="2" column="9" lean-forward="true" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="zb.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/devops/day10/zb.py">
+      <file leaf-file-name="mt.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/devops/day10/mt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="66" lean-forward="false" selection-start-line="7" selection-start-column="66" selection-end-line="7" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -218,9 +216,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/day06/func_arg.py" />
-        <option value="$PROJECT_DIR$/day06/account_1.py" />
-        <option value="$PROJECT_DIR$/day06/math_game.py" />
         <option value="$PROJECT_DIR$/day06/math_game_1.py" />
         <option value="$PROJECT_DIR$/day06/math_game2.py" />
         <option value="$PROJECT_DIR$/day06/anon.py" />
@@ -269,6 +264,9 @@
         <option value="$PROJECT_DIR$/devops/day10/myforkping.py" />
         <option value="$PROJECT_DIR$/devops/day10/myforkping_1.py" />
         <option value="$PROJECT_DIR$/devops/day10/zb.py" />
+        <option value="$PROJECT_DIR$/devops/day10/tcp_time_server.py" />
+        <option value="$PROJECT_DIR$/devops/day10/tcp_time_server_1.py" />
+        <option value="$PROJECT_DIR$/devops/day10/mt.py" />
       </list>
     </option>
   </component>
@@ -279,8 +277,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="101" />
-    <option name="y" value="198" />
+    <option name="x" value="487" />
+    <option name="y" value="139" />
     <option name="width" value="1893" />
     <option name="height" value="695" />
   </component>
@@ -351,7 +349,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.myforkping_1">
+  <component name="RunManager" selected="Python.tcp_time_server">
     <configuration name="match (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -366,25 +364,6 @@
       <module name="project" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/devops/day10/match.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="match" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/day10" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="project" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/day10/match.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -447,20 +426,39 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="tcp_time_server" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/devops/day10" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="project" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/devops/day10/tcp_time_server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.match" />
-      <item index="1" class="java.lang.String" itemvalue="Python.myfork" />
-      <item index="2" class="java.lang.String" itemvalue="Python.match (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.myforkping" />
-      <item index="4" class="java.lang.String" itemvalue="Python.myforkping_1" />
+      <item index="0" class="java.lang.String" itemvalue="Python.myfork" />
+      <item index="1" class="java.lang.String" itemvalue="Python.match (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Python.myforkping" />
+      <item index="3" class="java.lang.String" itemvalue="Python.myforkping_1" />
+      <item index="4" class="java.lang.String" itemvalue="Python.tcp_time_server" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.myforkping_1" />
-        <item index="1" class="java.lang.String" itemvalue="Python.myforkping" />
-        <item index="2" class="java.lang.String" itemvalue="Python.match (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.myfork" />
-        <item index="4" class="java.lang.String" itemvalue="Python.match" />
+        <item index="0" class="java.lang.String" itemvalue="Python.tcp_time_server" />
+        <item index="1" class="java.lang.String" itemvalue="Python.myforkping_1" />
+        <item index="2" class="java.lang.String" itemvalue="Python.myforkping" />
+        <item index="3" class="java.lang.String" itemvalue="Python.match (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Python.myfork" />
       </list>
     </recent_temporary>
   </component>
@@ -481,7 +479,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="101" y="198" width="1893" height="695" extended-state="0" />
+    <frame x="487" y="139" width="1893" height="695" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -522,28 +520,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/day06/func_arg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/day06/math_game_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="45" column="41" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/day06/math_game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="29" column="23" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/day06/math_game2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -873,7 +849,7 @@
         <state relative-caret-position="90">
           <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -932,16 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/devops/day10/myforkping_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/devops/day10/for_cat.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -958,13 +924,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/devops/day10/tcp_time_server_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="9" lean-forward="true" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devops/day10/tcp_time_server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#125#318#0" expanded="false" />
+            <element signature="e#366#651#0" expanded="false" />
+            <element signature="e#685#1267#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/devops/day10/zb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="66" lean-forward="false" selection-start-line="7" selection-start-column="66" selection-end-line="7" selection-end-column="66" />
+        <state relative-caret-position="121">
+          <caret line="18" column="27" lean-forward="true" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devops/day10/myforkping_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devops/day10/mt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
