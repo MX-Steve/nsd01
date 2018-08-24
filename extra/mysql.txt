@@ -28,5 +28,38 @@ mysql> grant proxy on mysqladmin to tom;
 	[此时will/tom和mysqladmin权限相同]
   客户端使用这两个用户测试，登录后发现和mysqladmin权限相同
 
+6.主库启动binlog日志，用户授权
+  systemctl stop mysqld
+   vim /etc/my.cnf
+	server_id=60
+	log-bin=master60
+	binlog-format="mixed"
+  systemctl start mysqld
+mysql> show master status;
+
+7.主库备份文件，并将sql文件传递到从库,授权
+[root@yaya mysql]# mysqldump -uroot -p123qqq...A --master-data=1 gamedba >/root/gamedb.sql # 记录sql日志位置,1表示显示记录位置
+mysql> grant replication slave on *.* to repluser@"%" identified by "123qqq...A";
+
+
+8.从库配置，启动slave配置,同步数据库
+vim /etc/my.cnf
+server_id=61
+systemctl start mysqld
+[root@yaya1 ~]# mysql -uroot -p123qqq...A 
+mysql> create database gamedb;
+[root@yaya1 ~]# mysql -uroot -p123qqq...A gamedb</root/gamedba.sql 
+mysql> change master to master_host="192.168.4.60",
+    -> master_user="repluser",
+    -> master_password="123qqq...A",
+    -> master_log_file="master60.000001",
+    -> master_log_pos=431;
+mysql> start slave;
+mysql> show slave status\G;
+	==>两个yes即表示同步成功
+
+9.从库编写监控脚本，监控io或者sql线程是否正常，不正常时，则报错
+
+
 
 
