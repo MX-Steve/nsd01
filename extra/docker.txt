@@ -1,3 +1,28 @@
+预备：
+	1.docker资源隔离：LXC(linux内核)
+		pid net uts mnt user ipc
+	2.docker资源限制：cgroup
+		control group 控制
+		CPU 内存
+		1.如何限制CPU?
+			stress压力测试工具 
+			docker run -it --rm -c 512 press
+				-c 开启多少个cpu进程
+				-m 分配内存
+	3.shipyard : docker管理web页面
+	4.简单操作
+		docker run --name xx -h xx
+		docker stop container id
+		docker ps 
+		docker ps -l
+		docker exec
+		docker rm dockerid
+		docker run -P 端口映射：随机映射
+		docker run -p hostport:containerport
+		数据映射
+		-v src:dst
+		--volumes-from
+============
 docker基础篇：
 1.docker简介
 	Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化,方便快捷。
@@ -30,3 +55,36 @@ docker基础篇：
 	2.数据卷容器
 		[root@steve ~]# docker run -it --name volume-test3 --volumes-from volume-test2 centos
 		volume-test2为之前存在的容器，不用启动，用他来做其他容器的存储
+
+6.docker镜像构建-手动构建
+	[root@steve ~]# docker run --name nginx-man -it centos 
+	[root@166dbd417f69 /]# yum -y install wget gcc gcc-c++ make openssl-devel
+	[root@166dbd417f69 /]# wget https://nginx.org/download/nginx-1.9.3.tar.gz
+	[root@166dbd417f69 /]# wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.38.tar.gz
+	[root@166dbd417f69 /]# useradd -s /sbin/nologin -M www
+	[root@166dbd417f69 /]# tar -xf nginx-1.9.3.tar.gz 
+	[root@166dbd417f69 /]# cd nginx-1.9.3
+	[root@166dbd417f69 /]# mkdir /usr/local/pcre
+	[root@166dbd417f69 /]# tar -xf pcre-8.38.tar.gz -C /usr/local/pcre
+	[root@166dbd417f69 /]# ls /usr/local/pcre
+	[root@166dbd417f69 nginx-1.9.3]# ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-http_stub_status_module --with-pcre=/usr/local/pcre/pcre-8.38
+	[root@166dbd417f69 nginx-1.9.3]# make &&make install
+	x//[root@166dbd417f69 nginx-1.9.3]# vi /etc/rc.local 
+		/usr/local/nginx/sbin/nginx
+	x//[root@166dbd417f69 nginx-1.9.3]# chmod +x /etc/rc.local
+	[root@166dbd417f69 nginx-1.9.3]# vi /usr/local/nginx/conf/nginx.conf
+		daemon off;
+	[root@166dbd417f69 nginx-1.9.3]# exit
+	[root@steve ~]# docker commit -m "my nginx" nginx-man steve/my-nginx #==>制作nginx镜像
+	[root@steve ~]# docker images ==>可以看到刚刚手动构建的镜像
+	[root@steve ~]# docker run -d -p 90:80 steve/my-nginx
+		#以刚创建的镜像为基础，启动容器
+	[root@steve ~]# docker run -d -p 90:80 steve/my-nginx /usr/local/nginx/sbin/nginx
+	[root@steve ~]# curl 127.0.0.1:90 ==>可以看到网页即可
+
+7.docker镜像购将-Dockerfile
+
+	
+
+
+
