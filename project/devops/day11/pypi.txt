@@ -1,0 +1,53 @@
+安装系统中不存在的模块，可以使用pip，相当于yum,pip是安装python包
+1.yum -y install gcc,C的源码
+2.国内镜像站点
+  mkdir ~/.pip
+  vim ~/.pip/pip.conf
+	[global]
+index-url=http://pypi.douban.com/simple/
+[install]
+trusted-host=pypi.douban.com
+3.安装pymysql
+pip3 install pymysql
+安装mariadb-server,启动并开机自启
+mysqladmin password tedu.cn
+
+规划数据库 tedu
+1.确定字段：
+	姓名、性别、出生、部门、职位、联系方式、基本工资、奖金、工资总和、发工资日期
+2.数据库规范
+	1.根据第一范式，要把一些字段进一步拆分
+	2.只有满足了1NF才能进行到2NF
+		在1NF的基础上，非主属性必须完全依赖于候选键
+		员工表：员工编号、姓名、性别、出生日期、部门ID、电话号码、email
+		部门表：部门ID、部门名称
+		工资表：auto_id,员工编号、日期、基本工资、奖金、工资总和
+	3.3NF任何非主属性不依赖于其他非主属性
+		工资总和是基本工资加奖金，所以不能出现在表中
+3.创建数据库
+mysql -uroot -ptedu.cn
+create database tedu default charset 'utf8';
+use tedu;
+部门
+create table departments( dep_id INT, dep_name varchar(20),primary key(dep_id));
+员工
+create table employees (
+    -> emp_id int primary key ,
+    -> emp_name varchar(20) not null,
+    -> birth_date date,
+    -> phone char(11),
+    -> email varchar(50),
+    -> dep_id int,
+    -> foreign key(dep_id) references departments(dep_id)
+    -> );
+工资
+create table salary(
+    -> auto_id int auto_increment primary key,
+    -> date date,
+    -> emp_id int,
+    -> basic int,
+    -> awards int,
+    -> foreign key(emp_id) references employees(emp_id)
+    -> );
+		
+
