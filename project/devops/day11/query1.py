@@ -35,14 +35,14 @@ session=Session()
 #for name in qset:
 #	print(name)
 
-#qset = session.query(Employees.emp_name).filter(~Employees.emp_name.in_(['zhangsan','zhanghong']))
-#print(qset)
-#for name in qset:
-#        print(name)
-
-qset = session.query(Employees.emp_name).filter(Employees.emp_name.isnot(None))
+qset = session.query(Employees.emp_name).filter(~Employees.emp_name.in_(['zhangsan','zhanghong'])) #qset是一个sql语句，filter函数内加~代表取反，配合in_，表示不在集合中
 print(qset)
 for name in qset:
-	print(name)
+        print(name)
+
+#qset = session.query(Employees.emp_name).filter(Employees.emp_name.isnot(None)) #qset是一个sql语句 安装emp_name列进行查询
+#print(qset) 
+#for name in qset: # for循环时则执行查询操作
+#	print(name)
 
 session.close()

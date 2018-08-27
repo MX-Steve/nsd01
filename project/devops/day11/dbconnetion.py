@@ -6,8 +6,8 @@ from sqlalchemy.orm import sessionmaker
 # 创建到连接数据库的引擎
 engine = create_engine(
 	'mysql+pymysql://root:tedu.cn@localhost/tarena?charset=utf8',
-	encoding='utf8',
-	echo=True
+	encoding='utf8' #,
+	#echo=True
 )
 
 Base=declarative_base(); # 生成ORM映射所需的基类
