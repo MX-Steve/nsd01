@@ -12,12 +12,19 @@ session = Session()
 #for name in qset:
 #        print(name)
 
-qset = session.query(Employees.emp_name,Employees.phone)
-print(qset.all())# 返回列表
-print(qset.first())# 返回满足条件的第一个值
+#qset = session.query(Employees.emp_name,Employees.phone)
+#print(qset.all())# 返回列表
+#print(qset.first())# 返回满足条件的第一个值
 #print(qset.one()) ==>>报错，多于一行
-qset = session.query(Employees.emp_name,Employees.phone).filter(Employees.emp_id==1)
-print(qset.one()) # 查询必须只有一项，否则报错
-print(qset.scalar()) # 调用one()，返回第一列的值
+#qset = session.query(Employees.emp_name,Employees.phone).filter(Employees.emp_id==1)
+#print(qset.one()) # 查询必须只有一项，否则报错
+#print(qset.scalar()) # 调用one()，返回第一列的值
+
+#qset=session.query(Employees)
+#print(qset.count())
+
+qset=session.query(Employees.emp_name,Departments.dep_name).join(Departments,Employees.dep_id==Departments.dep_id) # 前Employees,join后面就要是Departments
+print(qset)
+print(qset.all())
 
 session.close()
