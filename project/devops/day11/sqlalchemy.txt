@@ -1,0 +1,7 @@
+pip3 installl sqlalchemy
+ORM模型
+        对象关系映射
+1.安装
+	pip3 install sqlalchemy	
+2.创建数据库
+	create database tarena default charset 'utf8';

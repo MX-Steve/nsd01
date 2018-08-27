@@ -50,4 +50,7 @@ create table salary(
     -> foreign key(emp_id) references employees(emp_id)
     -> );
 		
-
+pip3 installl sqlalchemy
+ORM模型
+	对象关系映射
+	
