@@ -1,0 +1,1 @@
+eog /tmp/images/user-head.jpg #查看图片的命令
