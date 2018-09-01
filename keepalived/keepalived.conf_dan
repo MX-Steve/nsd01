@@ -11,7 +11,7 @@ global_defs {
    smtp_connect_timeout 30
    router_id LVS_DEVEL
    vrrp_skip_check_adv_addr
-   vrrp_strict
+   #vrrp_strict //默认启用,会添加iptables规则导致vip无法访问,因此关闭
    vrrp_garp_interval 0
    vrrp_gna_interval 0
 }
