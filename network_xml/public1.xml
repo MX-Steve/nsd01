@@ -1,0 +1,16 @@
+<!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh net-edit public1
+or other application using the libvirt API.
+-->
+
+<network>
+  <name>public1</name>
+  <uuid>ae289264-6a2e-46d2-a925-4d11637fdbba</uuid>
+  <bridge name='public1' stp='on' delay='0'/>
+  <mac address='52:54:00:88:2b:9c'/>
+  <domain name='public1'/>
+  <ip address='201.1.1.254' netmask='255.255.255.0'>
+  </ip>
+</network>

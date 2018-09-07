@@ -1,0 +1,16 @@
+<!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh net-edit rhce
+or other application using the libvirt API.
+-->
+
+<network>
+  <name>rhce</name>
+  <uuid>3f256312-81db-442b-b90d-9230409ae078</uuid>
+  <bridge name='rhce' stp='on' delay='0'/>
+  <mac address='52:54:00:45:6a:61'/>
+  <domain name='rhce'/>
+  <ip address='172.25.254.250' netmask='255.255.255.0'>
+  </ip>
+</network>

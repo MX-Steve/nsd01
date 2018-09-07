@@ -1,0 +1,16 @@
+<!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh net-edit private1
+or other application using the libvirt API.
+-->
+
+<network>
+  <name>private1</name>
+  <uuid>559de4a7-724c-4eec-ba19-3c7c2e69b4ad</uuid>
+  <bridge name='private1' stp='on' delay='0'/>
+  <mac address='52:54:00:37:78:11'/>
+  <domain name='private1'/>
+  <ip address='192.168.4.254' netmask='255.255.255.0'>
+  </ip>
+</network>
