@@ -1,0 +1,40 @@
+mysql第二章——查询结果排序
+1.以指定的次序返回查询结果
+	select ename,job,sal 
+		from emp
+		where deptno = 10
+		order by sal asc|desc 
+	提示：不一定要指定排序所基于的列名，亦可以给出表示这列的编号，从1开始
+	select ename,job,sal
+		from emp
+		where deptno = 10
+		order by 3 desc
+2.按照多个字段排序
+	select empno,deptno,sal,ename,job
+		from emp
+		order by deptno,sal desc 
+	先按照deptno排序[升序]，然后按照sal降序
+3.按子串排序
+	select ename,job
+		from emp
+		order by substr(job,length(job)-2)
+	按照job这一列的后两个字母排序
+4.对字母数字混合的数据排序
+	mysql不支持此种排序
+5.处理排序空值
+	排序时，将对应列是空值的也排在后面或者前面
+	select ename,sal,comm 
+		from emp
+		order by 3 [desc];
+	select ename,sal,comm
+		from (
+		select ename,sal,comm,
+			case when comm is null then 0 else 1 end as is_null
+			from emp
+		) x
+		order by is_null desc,comm
+6.根据数据项的键排序
+	例子：如果job是sale，要根据comm排序，否则sal排序
+	select ename,sal,job,comm
+		from emp
+		order by case when job = 'sale' then comm else sal end
