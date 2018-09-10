@@ -1,1 +1,0 @@
-SUBSYSTEM=="block", ATTR{size}=="20971520", ATTRS{vendor}=="LIO-ORG ", ATTRS{model}=="sdc             ", SYMLINK+="iscsi/node20"

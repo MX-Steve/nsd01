@@ -1,0 +1,92 @@
+第一章 检索记录——SELECT
+1.从表中检索所有行和列
+	select * from emp
+		提示：最好不要写*，写具体要查询的列名，一方面性能一样，另一方面有助于别人理解
+2.从表中检索部分行
+	select * from emp where deptno = 10
+3.查找满足多个条件的行
+	1.select *
+		from emp
+		where deptno = 10
+			or comm is not null
+			or sal <= 2000 and deptno = 20
+	2.select *
+		from emp
+		where ( deptno=10
+				or comm is not null
+				or sal <= 2000
+			)
+			and deptno = 20
+4.从表中检索部分列
+	select name,deptno,sal 
+		from emp
+5.为列取有意义的名称
+	select sal as salary, comm as commission
+		from emp
+6.在WHERE子句中引用取别名的列
+	select sal as salary, comm as commission
+		from emp
+		where salary < 5000
+	将查询作为内联视图就可以引用其中区别名的列了：
+	select *
+		from (
+		select sal as salary, comm as commission
+			from emp
+		) x
+		where salary < 5000
+7.连接列值——将多列作为一列返回
+	select concat(ename, ' works as a ', job) as msg
+		from 
+		where deptno = 10
+8.在SELECT语句中使用条件逻辑
+	select ename,sal,
+		case when sal <= 2000 then 'UNDER'
+			 when sal >= 4000 then 'OVER'
+			 else 'OK'
+		end as status
+		from emp
+9.限制返回的行数
+	select * from emp limit 5
+10.从表中随机返回n条记录
+	select ename,job 
+		from emp
+		order by  rand() limit 5
+11.查找空值
+	select * 
+		from emp
+		where common is null
+12.将空值转换为实际值
+	select coalesce(comm,0)
+		from emp
+13.按模式搜索
+	select ename,job 
+		from emp
+		where deptno in (10,20)
+	select ename, job
+		from emp
+		where deptno in (10,20)
+			and (ename like '%I%' or job like "%ER")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
