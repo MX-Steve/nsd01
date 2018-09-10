@@ -1,0 +1,6 @@
+#!/bin/bash
+read -p "请输入虚拟机名称：" vmname
+sed "s,demo,$vmname," /root/demo.xml >/etc/libvirt/qemu/$vmname.xml
+qemu-img create -f qcow2 -b /var/lib/libvirt/images/lihan.qcow2 /var/lib/libvirt/images/$vmname.img
+virsh define /etc/libvirt/qemu/$vmname.xml
+virsh start $vmname
