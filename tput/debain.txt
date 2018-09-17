@@ -1,0 +1,46 @@
+网易： debian
+阿里云：debian
+dpkg
+apt-get
+配置 deb 源，安装软件
+
+查看 service 命令的使用方法
+	service +chkconfig == systemctl 
+查看 chekconfig 命令的使用方法
+运行级别
+
+右上角：闪烁名称
+	扩展：tput
+		设置终端用的命令
+			setf	设置文字颜色 0-7
+			setb	背景颜色
+			cup		坐标：横坐标，纵坐标
+			blink	闪烁
+===================================================================
+一、tput用法：
+	1.概念：
+		tput命令将通过terminfo数据库对您的终端回话进行初始化和操作。
+	2.terminfo概念：
+		UNIX系统上的terminfo数据库用于定义终端的属性和功能，如行数、列数文本属性。
+	3.文本属性
+		前景：tput setaf [0-7]
+		背景：tput setab [0-7]
+		颜色：
+			0 – 黑色
+			1 – 红色
+			2 – 绿色
+			3 – 黄色
+			4 – 蓝色
+			5 – 紫红色
+			6 – 天蓝色
+			7 – 灰色
+	4.颜色脚本练习
+		color.sh
+		funColor.sh
+	5.光标属性
+		tput clear  # 清屏
+		tput sc		# 保存当前光标位置
+		tput cup 10 13 # 将光标移动到 row col
+		tput civis	#光标不可见
+		tput cnorm	#光标可见
+		tput rc		#显示输出
