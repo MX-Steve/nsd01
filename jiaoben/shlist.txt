@@ -1,0 +1,19 @@
+ha : 用于hadoop同步配置使用
+myvm7 : 自动创建虚拟机 centos7，可以自定义主机名和磁盘容量
+ping.sh : 查看176.4.16.0/24 网段的连通性
+pxe : 该文件夹用作pxe装机使用
+reconfig.sh : mysql主从同步时，主吧备切换的自动脚本
+sort.sh : 数组中值从小到大排序
+sortUnq.sh : 数组排序并去重
+users.sh : 查找用户名和密码
+xitong.sh : 查看主机系统信息
+yum.sh : 自动远程建yum的脚本，提供ip地址,主机密码,yum源即可
+009over.sh : 监视内存和空间，不够用后发送邮件报警
+010nginx.sh : 自动源码安装nginx-1.12.2
+011ng_switch.sh : nginx自定义启动脚本
+012jiankong.sh : 得出当前机器网卡流量、内存、用户数量、安装软件等基础信息
+audit_useradd.sh : audit监控其它管理员创建用户问题
+clone-myvm7 : 自动创建虚拟机
+ftp.sh : 搭建ftp服务器
+jindutiao.sh : 显示进度条，配合下载等操作使用
+mysql.sh : 远程自动安装mysql，并启动和开机自启
