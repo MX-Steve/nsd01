@@ -1,0 +1,58 @@
+mysql第三章——操作多个表
+1.记录集的叠加
+	把多个表中的行组合到一起
+	select ename as ename_and_dname,deptno
+		from emp
+		where deptno = 10
+		union all
+		select '____',null
+			from t1
+		union all
+		select dname,deptno
+			from dept
+	所有select列表中的项目数和对应项目数的数据类型必须要匹配，这跟其他所有集合的操作要求相同。
+	通常，查询中不要使用DISTINCT，除非却有必要这样做。
+2.组合相关的行
+	select e.ename,d.loc
+		from emp e, dept d
+		where e.deptno = d.deptno
+			and e.deptno = 10
+
+	select e.ename,d.loc
+		from emp e inner join dept d 
+			on (e.deptno = d.deptno)
+		where e.deptno = 10
+3.在两个表中查找共同行
+	试图V：
+	create view v 
+		as 
+		select ename,job,sal
+			from emp
+			where job = 'clerk'
+	返回表emp中与试图v行相匹配的所有员工的empno,ename,job,sal和deptno
+	select e.empno,e.ename,e.job,e.sal,e.deptno
+		from emp e,v
+		where e.ename = v.ename
+			and e.job = v.job
+			and e.sal = v.sal
+4.从一个表中查找另一个表没有的值
+	select deptno
+		from dept
+		where deptno not in (select deptno from emp)
+	如果deptno不是关键词，可以使用distinct保证结果只出现一次
+	select distinct deptno
+		from dept
+		where deptno not in (select deptno from emp)
+5.在一个表中查找与其他表不匹配的记录
+	
+
+
+
+
+
+
+
+
+
+
+
