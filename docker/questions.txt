@@ -1,0 +1,25 @@
+问题1：
+	多服务使用一个容器启动，Dockerfile: 
+		CMD  ["/etc/init.d/auto.sh"]
+		可以写成 CMD /etc/init.d/auto.sh ,班里这两种写法都能使用，服务也都能正常使用。
+	但是有一个学员的做不了，
+		CMD  ["/etc/init.d/auto.sh"] 
+		这样写就会报错，无法启动容器
+		CMD ["/bin/sh", "-C", "/etc/init.d/auto.sh"]
+		或者
+		CMD /etc/init.d/auto.sh
+		这两种可以执行成功
+	也无相关日志，不知道是什么原因？
+问题2：
+	学员使用模板创建两台虚拟机，能够ping通真机，但是两台虚拟机之间无法ping通。
+	两个虚拟机的网关都是vbr，192.168.1.254，ip1：192.168.1.10/24 ip2: 192.168.1.11/24 , 感觉一切正常，也没有iptables规则
+问题3：
+	一学员使用docker封装mysql，nginx两个镜像
+	mysql使用的是庞老师提供的mysql软件包，启动容器，能够正常访问使用，也能够远程连接
+	nginx使用nginx源码包编译安装，并且在这个容器里安装了php，php-fpm，启动nginx和php-fpm，
+		vim info.php
+			<?php
+				phpinfo()
+			?>
+		firefox http://172.17.0.2/info.php , 发现里面没有mysqli模块，但是php又是通过mysqli连接数据库的，所以准备扩展mysqli模块。各种百度就是不能能够，下面是报错信息：
+PHPStartup: unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20131226/mysqli.so' - /usr/local/lib/php/extensions/no-debug-non-zts-20131226/mysqli.so:undefined symbol: mysqlnd_connect in Unknown on line 0
