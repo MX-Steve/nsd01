@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    username: lx
+  tasks:
+   - name: create user "{{username}}"
+     user: group=wheel  password={{'123456'|password_hash('sha512')}} name={{username}}
+   - shell: chage -d 0 {{username}}

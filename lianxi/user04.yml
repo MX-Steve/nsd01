@@ -1,0 +1,11 @@
+---
+- hosts: web
+  remote_user: root
+  vars:
+    username: lili
+  tasks:
+    - shell: useradd "{{username}}"
+      ignore_errors: True
+    - name: set password
+      shell: echo "aa" | passwd --stdin "{{username}}"
+    - shell: chage -d 0 "{{username}}"

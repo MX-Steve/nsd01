@@ -1,0 +1,12 @@
+---
+- hosts: cache
+  remote_user: root
+  vars:
+    username: "li5"
+  tasks:
+    - user:
+        name: "{{username}}"
+        group: users
+    - name: set password
+      shell: echo "123456"|passwd --stdin "{{username}}"
+    - shell: chage -d 0 "{{username}}"
