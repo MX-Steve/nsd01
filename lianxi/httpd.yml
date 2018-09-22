@@ -1,0 +1,24 @@
+---
+- hosts: web
+  remote_user: root
+  tasks:
+    - yum:
+        name: httpd
+        state: latest
+    - replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^(#ServerName).*'
+        replace: 'ServerName localhost'
+    - replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^(Listen).*'
+        replace: '\1 8080'
+    - shell: echo "hello world">/var/www/html/index.html
+      notify:
+        - restart apache
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+        

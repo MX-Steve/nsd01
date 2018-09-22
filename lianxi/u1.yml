@@ -1,0 +1,10 @@
+---
+- hosts: cache
+  remote_user: root
+  tasks:
+    - user:
+        name: "{{item}}"
+        group: users
+        password: "{{'ab'|password_hash('sha512')}}"
+      with_items: ["nb","dd","jj","xx"]
+
