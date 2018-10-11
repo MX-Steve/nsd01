@@ -17,7 +17,7 @@ done
 #创建node1-3的xml文件并启用
 for node in ceph{2..4}
 do
-	sed "s/rh7_template/$node/" /root/ceph/.rhel7_3d.xml >/etc/libvirt/qemu/$node.xml
+	sed "s/rh7_template/$node/" ./.rhel7_3d.xml >/etc/libvirt/qemu/$node.xml
 	virsh define /etc/libvirt/qemu/$node.xml
 	virsh start $node
 	virsh destroy $node
@@ -26,7 +26,7 @@ done
 #创建client和node4-5三台xml文件并启用
 for node in ceph{1,5,6}
 do
-	sed "s/rh7_template/$node/" /root/ceph/.rhel7.xml >/etc/libvirt/qemu/$node.xml
+	sed "s/rh7_template/$node/" ./.rhel7.xml >/etc/libvirt/qemu/$node.xml
         virsh define /etc/libvirt/qemu/$node.xml
         virsh start $node
 	virsh destroy $node

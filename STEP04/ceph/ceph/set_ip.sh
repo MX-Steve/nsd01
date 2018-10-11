@@ -32,7 +32,7 @@ EOF
 
 #配置yum源
 rm -rf /mnt/$vmname/etc/yum.repos.d/*
-cp /root/ceph/dvd.repo /mnt/$vmname/etc/yum.repos.d/dvd.repo
+cp ./dvd.repo /mnt/$vmname/etc/yum.repos.d/dvd.repo
 
 umount /mnt/$vmname
 rm -rf /mnt/$vmname
