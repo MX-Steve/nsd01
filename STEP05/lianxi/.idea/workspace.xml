@@ -18,9 +18,10 @@
     <SUITE FILE_PATH="coverage/python05$myfile.coverage" NAME="myfile Coverage Results" MODIFIED="1539762331577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
     <SUITE FILE_PATH="coverage/python05$game_v1.coverage" NAME="game_v1 Coverage Results" MODIFIED="1539756490902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day02" />
     <SUITE FILE_PATH="coverage/python05$while3.coverage" NAME="while3 Coverage Results" MODIFIED="1539757740615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day02" />
+    <SUITE FILE_PATH="coverage/python05$myuser.coverage" NAME="myuser Coverage Results" MODIFIED="1539852201104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
     <SUITE FILE_PATH="coverage/python05$py1.coverage" NAME="py1 Coverage Results" MODIFIED="1539844985340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
     <SUITE FILE_PATH="coverage/python05$grate.coverage" NAME="grate Coverage Results" MODIFIED="1539751841690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day02" />
-    <SUITE FILE_PATH="coverage/python05$type1.coverage" NAME="type1 Coverage Results" MODIFIED="1539848460385" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
+    <SUITE FILE_PATH="coverage/python05$type1.coverage" NAME="type1 Coverage Results" MODIFIED="1539849790562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
     <SUITE FILE_PATH="coverage/python05$fun2.coverage" NAME="fun2 Coverage Results" MODIFIED="1539827552376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
     <SUITE FILE_PATH="coverage/python05$randpass1.coverage" NAME="randpass1 Coverage Results" MODIFIED="1539843722747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
     <SUITE FILE_PATH="coverage/python05$kws.coverage" NAME="kws Coverage Results" MODIFIED="1539845146973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
@@ -30,6 +31,7 @@
     <SUITE FILE_PATH="coverage/python05$game.coverage" NAME="game Coverage Results" MODIFIED="1539751871997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day02" />
     <SUITE FILE_PATH="coverage/python05$liebiaojiexi.coverage" NAME="liebiaojiexi Coverage Results" MODIFIED="1539762049369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
     <SUITE FILE_PATH="coverage/python05$py01.coverage" NAME="py01 Coverage Results" MODIFIED="1539671924013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/python05$seq.coverage" NAME="seq Coverage Results" MODIFIED="1539850592341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
     <SUITE FILE_PATH="coverage/python05$if1.coverage" NAME="if1 Coverage Results" MODIFIED="1539750298626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day02" />
     <SUITE FILE_PATH="coverage/python05$randpass.coverage" NAME="randpass Coverage Results" MODIFIED="1539832881710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
     <SUITE FILE_PATH="coverage/python05$cp3.coverage" NAME="cp3 Coverage Results" MODIFIED="1539827148615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
@@ -38,6 +40,7 @@
     <SUITE FILE_PATH="coverage/python05$range1.coverage" NAME="range1 Coverage Results" MODIFIED="1539761334700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
     <SUITE FILE_PATH="coverage/python05$while1.coverage" NAME="while1 Coverage Results" MODIFIED="1539757079884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day02" />
     <SUITE FILE_PATH="coverage/python05$type.coverage" NAME="type Coverage Results" MODIFIED="1539759749945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
+    <SUITE FILE_PATH="coverage/python05$type2.coverage" NAME="type2 Coverage Results" MODIFIED="1539851206759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day04" />
     <SUITE FILE_PATH="coverage/python05$fun1.coverage" NAME="fun1 Coverage Results" MODIFIED="1539827381324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python01/day03" />
   </component>
   <component name="FileEditorManager">
@@ -45,71 +48,21 @@
       <file leaf-file-name="randpass.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python01/day04/randpass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="204">
+              <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="randpass1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python01/day04/randpass1.py">
+      <file leaf-file-name="myuser.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/python01/day04/myuser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="340">
+              <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#61#91#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="py1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python01/day04/py1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="25" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kws.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python01/day04/kws.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mytouch.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python01/day04/mytouch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="myt.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python01/day04/myt.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="type1.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/python01/day04/type1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -156,6 +109,9 @@
         <option value="$PROJECT_DIR$/python01/day04/mytouch.py" />
         <option value="$PROJECT_DIR$/python01/day04/myt.py" />
         <option value="$PROJECT_DIR$/python01/day04/type1.py" />
+        <option value="$PROJECT_DIR$/python01/day04/seq.py" />
+        <option value="$PROJECT_DIR$/python01/day04/type2.py" />
+        <option value="$PROJECT_DIR$/python01/day04/myuser.py" />
       </list>
     </option>
   </component>
@@ -236,7 +192,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.type1">
+  <component name="RunManager" selected="Python.myuser">
     <configuration name="kws" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -256,7 +212,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="py1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="myuser" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -269,13 +225,13 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python05" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python01/day04/py1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python01/day04/myuser.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="randpass (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="seq" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -288,26 +244,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python05" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python01/day04/randpass.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="randpass1" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python01/day04" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="python05" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python01/day04/randpass1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python01/day04/seq.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -332,20 +269,39 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="type2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python01/day04" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python05" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python01/day04/type2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.randpass (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Python.randpass1" />
-      <item index="2" class="java.lang.String" itemvalue="Python.py1" />
-      <item index="3" class="java.lang.String" itemvalue="Python.kws" />
-      <item index="4" class="java.lang.String" itemvalue="Python.type1" />
+      <item index="0" class="java.lang.String" itemvalue="Python.kws" />
+      <item index="1" class="java.lang.String" itemvalue="Python.type1" />
+      <item index="2" class="java.lang.String" itemvalue="Python.seq" />
+      <item index="3" class="java.lang.String" itemvalue="Python.type2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.myuser" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.type1" />
-        <item index="1" class="java.lang.String" itemvalue="Python.kws" />
-        <item index="2" class="java.lang.String" itemvalue="Python.py1" />
-        <item index="3" class="java.lang.String" itemvalue="Python.randpass1" />
-        <item index="4" class="java.lang.String" itemvalue="Python.randpass (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.myuser" />
+        <item index="1" class="java.lang.String" itemvalue="Python.type2" />
+        <item index="2" class="java.lang.String" itemvalue="Python.seq" />
+        <item index="3" class="java.lang.String" itemvalue="Python.type1" />
+        <item index="4" class="java.lang.String" itemvalue="Python.kws" />
       </list>
     </recent_temporary>
   </component>
@@ -713,14 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python01/day04/randpass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.6/string.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
@@ -773,9 +721,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/python01/day04/type1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python01/day04/seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python01/day04/type2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="35" lean-forward="true" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python01/day04/randpass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python01/day04/myuser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+          <folding>
+            <element signature="e#61#91#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

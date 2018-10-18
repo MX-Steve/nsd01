@@ -23,7 +23,7 @@
 #
 # print(sorted(alist))
 
-a = 'SSH无密码（密钥验证）登录的配置'
+a = 'lllL'
 b = a.encode('utf8')
 print(b)
 c = b.decode('utf8')
