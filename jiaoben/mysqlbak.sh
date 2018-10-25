@@ -1,17 +1,17 @@
-#!/bin/bash
+!/bin/bash
 # W 第几周
 # d 周几
-# full 备份目录
+# dir 备份目录
 
 W=`date +%W`
 d=`date +%w`
-full='/mysqlback/'
+dir='/mysqlback/'
 user="root"
 password="123qqq...A"
-[ -d ${full}${W} ] || mkdir -p ${full}${W}/$d
+[ -d ${dir}${W} ] || mkdir -p ${dir}${W}/$d
 if [ $d -eq 1 ] ; then
-	innobackupex --user=$user --password=$password ${full}${W}/$d --no-timestamp
+	innobackupex --user=$user --password=$password ${dir}${W}/$d --no-timestamp
 else 
-	innobackupex  --user=$user --password=$password --incremental ${full}${W}/$d --incremental-basedir=${full}${W}/$[d-1] --no-timestamp
+	innobackupex  --user=$user --password=$password --incremental ${dir}${W}/$d --incremental-basedir=${dir}${W}/$[d-1] --no-timestamp
 fi
 
