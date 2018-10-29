@@ -1,0 +1,101 @@
+gtid: 事物的编号
+server_id:mysql instance的编号
+set global max_allowed_packet=64*1024*1024
+
+
+1.mysql优化
+	1.服务器运行时，硬件使用情况（cpu 内存 磁盘）
+	2.网络接口流量 eth0
+	3.mysql运行时，参数配置
+		show variables;
+		show global status;
+		并发连接数量
+		超时时间
+		重复使用的线程数量
+		多个线程同时打开表的数量
+		查询缓存  索引缓存 
+		处理不同查询方式 mysql服务器线程使用缓存设置
+		select * from a;
+		select name,age from a order by age desc;
+		show variables like "query_cache_%"
+		查看查询缓存统计信息
+		show variable like "qcache_%"
+	4.优化程序员编写的sql命令
+		查询日志
+			general-log : 所有sql命令的操作
+		慢查询日志
+			记录耗时较长或不使用索引的查询操作
+			slow-query-log
+			long-query-time= 默认十秒
+			log-queries-not-using-indexes 没有使用索引的查询
+		mysqldumpslow /var/lib/mysql/50-slow.log >/root/sql.txt 查看慢查询日志的sql命令
+		错误日志
+			log-error=/var/log/mysqld.log
+		binlog日志文件
+			
+	5.优化网络架构： 结构中不要有数据传输瓶颈，不要有单点故障
+	MHA集群：高可用集群，一主多从，保证所有mysql服务正常运行、网络没有堵塞
+	mysql  |  oracle  |  sqlserver
+
+
+redis
+1.配置讲解	
+	1.tcp-backlog tcp并发连接数
+	2.timeout 0 超时时间
+	3.tcp-keepalive 300 300s后，服务器发ack确认包给客户端，客户端没有回应，则断掉
+	4.daemonize yes 已守护进程的方式运行
+	5. logfile /var/log/redis_6379.log  日志文件
+	6.databases 16 默认数据库个数
+	7.maxclients 并发连接数
+	8.dir /var/lib/redis/6379 数据库目录
+2.内存清除策略
+	1.volatile-lru  //最近最少使用 （设置了ttl的key）
+	2.allkeys-lru   // 删除最少使用的key
+	3.volatile-random   //在设置了ttl的key里随机删除
+	4.allkeys-random    //随机删除
+	5.volatile-ttl (minor TTL)   // 移除最近过期的key
+3.选项默认设置
+	1.maxmemory <bytes> //最大内存
+	2.maxmemory-policy noeviction // 定义使用策略
+	3.maxmemory-samples 5 //选取模板数量（针对lru 和 ttl策略）
+
+密码安全策略默认是不开的，数据存在linux系统的内存里，给linux系统做好安全就行
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+用来恢复数据或主从同步使用
